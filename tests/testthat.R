@@ -1,7 +1,7 @@
 # nolint start
 library(testthat)
-library(socialmixr)
+library(contactsurveys)
 # nolint end
 
 data.table::setDTthreads(1)
-test_check("socialmixr")
+test_check("contactsurveys")

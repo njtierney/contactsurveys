@@ -1,0 +1,69 @@
+---
+title: "Introduction to contactsurveys"
+author: "Sebastian Funk & Nicholas Tierney"
+date: "`r Sys.Date()`"
+link-citations: true
+bibliography: contactsurveys.bib
+nocite: '@*'
+output:
+  rmarkdown::html_vignette: 
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Introduction to contactsurveys}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+library(knitr)
+library(contactsurveys)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+data.table::setDTthreads(1)
+```
+
+[contactsurveys](https://github.com/njtierney/contactsurveys) is an `R` package to download contact surveys for use in age-structured [infectious disease models](https://en.wikipedia.org/wiki/Mathematical_modelling_of_infectious_disease). This code was initially in the [socialmixr](https://github.com/epiforecasts/socialmixr), but the specific code for downloading surveys has been placed into this package. For background on age-specific mixing matrices and what data inform them, see, for example, the paper on POLYMOD by [@mossong_social_2008].
+
+# Usage
+
+`contactsurveys` provides access to all surveys in the [Social contact data](https://zenodo.org/communities/social_contact_data) community on [Zenodo](https://zenodo.org). The available surveys can be listed (if an internet connection is available) with:
+
+```{r eval=FALSE}
+list_surveys()
+```
+
+A survey can be downloaded using the `get_survey()` command. This will get the relevant data of a survey given its Zenodo DOI (as returned by `list_surveys()`). All other relevant commands in the `contactsurveys` package accept a DOI, but if a survey is to be used repeatedly it is worth downloading it and storing it locally to avoid the need for a network connection and speed up processing.
+
+```{r eval=FALSE}
+peru_survey <- get_survey("https://doi.org/10.5281/zenodo.1095664")
+saveRDS(peru_survey, "peru.rds")
+```
+
+This way, the `peru` data set can be loaded in the future without the need for an internet connection using
+
+```{r eval=FALSE}
+peru_survey <- readRDS("peru.rds")
+```
+
+Some surveys may contain data from multiple countries. To check this, use the `survey_countries` function
+
+```{r}
+#| eval: false
+# TODO - update this to note use polymod
+survey_countries(polymod)
+```
+
+If one wishes to get a contact matrix for one or more specific countries, a `countries` argument can be passed to `contact_matrix()`. If this is not done, the different surveys contained in a dataset are combined as if they were one single sample (i.e., not applying any population-weighting by country or other correction).
+
+A reference for any given survey can be obtained using `get_citation()`, e.g.
+
+```{r}
+#| eval: false
+# TODO - update this to note use polymod
+get_citation(polymod)
+```
+
+# References
+

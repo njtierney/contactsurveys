@@ -1,0 +1,16 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+cran-comments.md
+^revdep$
+^CRAN-RELEASE$
+^\.github$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^codecov\.yml$
+^LICENSE\.md$
+^CRAN-SUBMISSION$
+^\.lintr$
+^surveys$
+^revdep$
+^README.Rmd$

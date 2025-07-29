@@ -4,7 +4,6 @@
 #'
 #' @param x a character vector of surveys to cite
 #' @return citation as bibentry
-#' @importFrom utils bibentry
 #' @importFrom httr GET content
 #' @examples
 #' data(polymod)
@@ -14,7 +13,8 @@
 #' @export
 get_citation <- function(x) {
   survey <- get_survey(x)
-  if (is.null(x$reference)) stop("No citation defined for ", ifelse(is.null(x$name), "survey", x$name))
+  if (is.null(x$reference))
+    stop("No citation defined for ", ifelse(is.null(x$name), "survey", x$name))
 
   ref <-
     c(
@@ -22,7 +22,7 @@ get_citation <- function(x) {
       x$reference
     )
 
-  bref <- do.call(bibentry, ref)
+  bref <- do.call(utils::bibentry, ref)
 
   return(bref)
 }

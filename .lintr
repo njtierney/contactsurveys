@@ -6,7 +6,7 @@ linters: linters_with_tags(
     todo_comment_linter = NULL,
     function_argument_linter = NULL,
     backport_linter("3.5.0"),
-    # Extra exclusions for socialmixr.
+    # Extra exclusions for conractsurveys.
     # These exclusions should ideally be removed at some point.
     line_length_linter = NULL,
     cyclocomp_linter = NULL,

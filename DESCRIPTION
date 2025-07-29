@@ -1,5 +1,5 @@
-Package: socialmixr
-Title: Social Mixing Matrices for Infectious Disease Modelling
+Package: contactsurveys
+Title: Download Contact Surveys for use in Infectious Disease Modelling
 Version: 0.4.0.9000
 Authors@R: c(
     person("Sebastian", "Funk", , "sebastian.funk@lshtm.ac.uk", role = c("aut", "cre")),
@@ -13,47 +13,34 @@ Authors@R: c(
     person("Niel", "Hens", role = "ctb"),
     person("Pietro", "Coletti", role = c("col", "dtm"))
   )
-Description: Provides methods for sampling contact matrices from diary
-    data for use in infectious disease modelling, as discussed in Mossong
-    et al. (2008) <doi:10.1371/journal.pmed.0050074>.
+Description: Provides methods for downloading contact surveys that are then 
+  used in infectious disease modelling.
 License: MIT + file LICENSE
 Depends: 
     R (>= 3.5.0)
 Imports:
-    checkmate,
-    countrycode,
     curl,
     data.table,
-    grDevices,
     httr,
     jsonlite,
-    lifecycle,
-    lubridate,
     memoise,
-    purrr,
     oai,
-    wpp2017,
     xml2
 Suggests:
-    ggplot2,
-    here,
     knitr,
-    quarto,
-    reshape2,
     rmarkdown,
-    roxyglobals (>= 1.0.0),
-    testthat,
-    withr
+    roxyglobals,
+    testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
 LazyData: true
 NeedsCompilation: no
 RoxygenNote: 7.3.2
-URL: https://github.com/epiforecasts/socialmixr,
-    https://epiforecasts.io/socialmixr/
-BugReports: https://github.com/epiforecasts/socialmixr/issues
-Roxygen: list(
-    markdown = TRUE,
-    roclets = c("collate", "namespace", "rd", "roxyglobals::global_roclet"))
+URL: https://github.com/njtierney/contactsurveys
+BugReports: https://github.com/njtierney/contactsurveys/issues
+Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
+    "roxyglobals::global_roclet"))
 Config/testthat/edition: 3
+Config/roxyglobals/filename: globals.R
+Config/roxyglobals/unique: FALSE
