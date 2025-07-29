@@ -2,37 +2,28 @@
 output: github_document
 ---
 
-# Social mixing matrices for infectious disease modelling in R
+# Download contacy surveys for use in infectious disease modelling in R
 
 <!-- badges: start -->
-[![CRAN version](https://www.r-pkg.org/badges/version-ago/socialmixr)](https://cran.r-project.org/package=socialmixr)
-[![R-CMD-check](https://github.com/epiforecasts/socialmixr/workflows/R-CMD-check/badge.svg)](https://github.com/epiforecasts/socialmixr/actions)
-[![Codecov test coverage](https://codecov.io/gh/epiforecasts/socialmixr/graph/badge.svg)](https://app.codecov.io/gh/epiforecasts/socialmixr)
 <!-- badges: end -->
 
-[socialmixr](https://github.com/epiforecasts/socialmixr) is an `R` package to derive social mixing matrices from survey data.
+`contactsurveys` is an `R` package to download contacy survey data, which can be used to derive social mixing matrices, see for example [socialmixr](https://github.com/epiforecasts/socialmixr).
 
 # Installation
 
 The package can be installed using
 
-```r
-install.packages("socialmixr")
-```
-
 The current development version can be installed using the `remotes` package
 
 ```r
-remotes::install_github("epiforecasts/socialmixr")
+remotes::install_github("njtierney/contactsurveys")
 ```
 
 # Documentation
 
-For information on how to use the socialmixr package, see the [introduction vignette](https://epiforecasts.io/socialmixr/articles/socialmixr.html).
+For information on how to use the contactsurveys package, see the [introduction vignette](TODO).
 
 ## Contributors
-
-
 
 
 
