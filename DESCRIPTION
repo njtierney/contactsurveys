@@ -17,14 +17,18 @@ Description: Provides methods for downloading contact surveys that are then
   used in infectious disease modelling.
 License: MIT + file LICENSE
 Depends: 
-    R (>= 3.5.0)
+    R (>= 4.1.0)
 Imports:
+    checkmate,
+    countrycode,
     curl,
     data.table,
     httr,
     jsonlite,
+    lubridate,
     memoise,
     oai,
+    purrr,
     xml2
 Suggests:
     knitr,
