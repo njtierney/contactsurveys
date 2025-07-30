@@ -1,9 +1,5 @@
 name: render-readme
 
-permissions:
-  contents: write
-  pull-requests: write
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
   cancel-in-progress: true
@@ -16,6 +12,9 @@ on:
 
 jobs:
   render-readme:
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: macos-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
