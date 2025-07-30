@@ -5,6 +5,7 @@
 #' @param ... extra options (currently not used)
 #' @autoglobal
 #' @importFrom jsonlite fromJSON
+#' @importFrom data.table fread
 #' @examples
 #' \dontrun{
 #' list_surveys()

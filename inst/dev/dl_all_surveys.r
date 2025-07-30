@@ -12,9 +12,9 @@ tic()
 survey_files <- purrr::map(ls$url, function(x) {
   download_survey(
     survey = x,
-    dir = "surveys",
-    sleep = 10
+    dir = "surveys"
   )
+  Sys.sleep(10)
 })
 toc()
 ## name list elements according to url

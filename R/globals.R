@@ -16,7 +16,6 @@ utils::globalVariables(c(
   "title", # <.list_surveys>
   "creator", # <.list_surveys>
   "identifier.2", # <.list_surveys>
-  "fread", # <load_survey>
   ":=", # <load_survey>
   "..main_id", # <load_survey>
   ".N", # <load_survey>
