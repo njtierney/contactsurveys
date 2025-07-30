@@ -10,11 +10,11 @@ dir.create(here("surveys"), showWarnings = FALSE)
 ## save them in the `surveys` folder (which is created if it does not exist)
 tic()
 survey_files <- purrr::map(ls$url, function(x) {
+  Sys.sleep(10)
   download_survey(
     survey = x,
     dir = "surveys"
   )
-  Sys.sleep(10)
 })
 toc()
 ## name list elements according to url
