@@ -2,3 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+.DS_Store
+inst/doc
+docs/
+surveys/
+revdep/
