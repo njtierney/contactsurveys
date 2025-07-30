@@ -42,7 +42,7 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
       followlocation = 1
     ),
     user_agent(paste0(
-      "http://github.com/njtierney/contactsurveys R package contactsurveys/v.",
+      "http://github.com/epiforecasts/contactsurveys R package contactsurveys/v.",
       packageVersion("contactsurveys")
     ))
   )
