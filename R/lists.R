@@ -2,6 +2,7 @@
 #'
 #' @return character vector of surveys
 #' @inheritParams get_survey
+#' @importFrom memoise memoise
 #' @examples
 #' \dontrun{
 #' list_surveys()
@@ -19,6 +20,7 @@ list_surveys <- function(clear_cache = FALSE) {
 
 #' @autoglobal
 #' @importFrom oai list_records
+#' @importFrom data.table data.table setkey rbindlist
 #' @keywords internal
 .list_surveys <- function() {
   record_list <-
@@ -67,8 +69,15 @@ list_surveys <- function(clear_cache = FALSE) {
 #' @return list of countries
 #' @inheritParams get_survey
 #' @examples
-#' data(polymod)
+#' \dontrun{
+#' # not run because it requires an internet connection
+#' current_surveys <- list_surveys()
+#' polymod_url <- subset(current_surveys, grepl("POLYMOD", title))[["url"]]
+#' # "https://doi.org/10.5281/zenodo.3874557"
+#' polymod <- get_survey(polymod_url)
+#' polymod
 #' survey_countries(polymod)
+#' }
 #' @export
 survey_countries <- function(survey, country.column = "country", ...) {
   survey <- get_survey(survey, ...)

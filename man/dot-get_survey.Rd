@@ -7,7 +7,8 @@
 .get_survey(survey, ...)
 }
 \arguments{
-\item{survey}{a DOI or url to get the survey from, or a \code{\link[=survey]{survey()}} object (in which case only cleaning is done).}
+\item{survey}{a DOI or url to get the survey from, or a for a "contact_survey" object, created
+with \code{\link[=as_contact_survey]{as_contact_survey()}}, object (in which case only cleaning is done).}
 
 \item{...}{extra options (currently not used)}
 }

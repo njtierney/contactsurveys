@@ -1,15 +1,24 @@
 #' @title Citation for a survey
 #'
-#' @description Gets a full citation for a [survey()].
+#' @description Gets a full citation for a "contact_survey" object, created
+#'   with [as_contact_survey()].
 #'
 #' @param x a character vector of surveys to cite
 #' @return citation as bibentry
 #' @importFrom httr GET content
+#' @importFrom utils bibentry
 #' @examples
-#' data(polymod)
+#' \dontrun{
+#' # not run because it requires an internet connection
+#' current_surveys <- list_surveys()
+#' polymod_url <- subset(current_surveys, grepl("POLYMOD", title))[["url"]]
+#' # "https://doi.org/10.5281/zenodo.3874557"
+#' polymod <- get_survey(polymod_url)
+#' polymod
 #' citation <- get_citation(polymod)
 #' print(citation)
 #' print(citation, style = "bibtex")
+#' }
 #' @export
 get_citation <- function(x) {
   survey <- get_survey(x)
@@ -22,7 +31,7 @@ get_citation <- function(x) {
       x$reference
     )
 
-  bref <- do.call(utils::bibentry, ref)
+  bref <- do.call(bibentry, ref)
 
   return(bref)
 }

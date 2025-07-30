@@ -13,11 +13,19 @@ get_citation(x)
 citation as bibentry
 }
 \description{
-Gets a full citation for a \code{\link[=survey]{survey()}}.
+Gets a full citation for a "contact_survey" object, created
+with \code{\link[=as_contact_survey]{as_contact_survey()}}.
 }
 \examples{
-data(polymod)
+\dontrun{
+# not run because it requires an internet connection
+current_surveys <- list_surveys()
+polymod_url <- subset(current_surveys, grepl("POLYMOD", title))[["url"]]
+# "https://doi.org/10.5281/zenodo.3874557"
+polymod <- get_survey(polymod_url)
+polymod
 citation <- get_citation(polymod)
 print(citation)
 print(citation, style = "bibtex")
+}
 }
