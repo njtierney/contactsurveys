@@ -82,8 +82,8 @@ as_contact_survey <- function(
 
   survey <- new_contact_survey(
     participants = x$participants,
-    contacts     = x$contacts,
-    reference    = x$reference
+    contacts = x$contacts,
+    reference = x$reference
   )
   survey <- clean(survey)
 
