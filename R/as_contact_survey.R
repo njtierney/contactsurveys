@@ -69,7 +69,8 @@ as_contact_survey <- function(
         " column '",
         to_check[[column]],
         "' does not exist ",
-        "in the participant data frame"
+        "in the participant data frame",
+        call. = FALSE
       )
     } else {
       setnames(x$participants, to_check[[column]], column)
@@ -77,7 +78,7 @@ as_contact_survey <- function(
   })
 
   if (is.null(x$reference)) {
-    warning("No reference provided")
+    warning("No reference provided", call. = FALSE)
   }
 
   survey <- new_contact_survey(

@@ -23,7 +23,11 @@
 get_citation <- function(x) {
   survey <- get_survey(x)
   if (is.null(x$reference)) {
-    stop("No citation defined for ", ifelse(is.null(x$name), "survey", x$name))
+    stop(
+      "No citation defined for ",
+      ifelse(is.null(x$name), "survey", x$name),
+      call. = FALSE
+    )
   }
 
   ref <- c(

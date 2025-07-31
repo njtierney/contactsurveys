@@ -45,13 +45,14 @@ get_survey <- function(survey, clear_cache = FALSE, ...) {
 .get_survey <- function(survey, ...) {
   if (inherits(survey, "contact_survey")) {
     new_survey <- copy(survey)
+  } else if (is.character(survey)) {
+    files <- download_survey(survey)
+    new_survey <- load_survey(files)
   } else {
-    if (is.character(survey)) {
-      files <- download_survey(survey)
-      new_survey <- load_survey(files)
-    } else {
-      stop("'survey' must be an 'contact_survey' object or character")
-    }
+    stop(
+      "'survey' must be an 'contact_survey' object or character",
+      call. = FALSE
+    )
   }
 
   return(new_survey)
