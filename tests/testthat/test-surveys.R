@@ -19,7 +19,6 @@ test_that("surveys can be downloaded", {
 })
 
 test_that("surveys can be cited", {
-  # not run because it requires an internet connection
   current_surveys <- list_surveys()
   polymod_url <- subset(current_surveys, grepl("POLYMOD", title))[["url"]]
   # "https://doi.org/10.5281/zenodo.3874557"
