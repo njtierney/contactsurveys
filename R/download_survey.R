@@ -35,10 +35,17 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
   }
 
   if (is.doi) {
-    url <- paste0("https://doi.org/", survey)
+    survey_url <- paste0("https://doi.org/", survey)
   } else {
-    url <- survey
+    survey_url <- survey
   }
+
+  temp_body <- GET(
+    survey_url,
+    config = config(
+      followlocation = 1
+    )
+  )
 
   temp_body <- GET(
     url,
