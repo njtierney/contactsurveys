@@ -71,9 +71,7 @@ list_surveys <- function(clear_cache = FALSE) {
 #' @examples
 #' \dontrun{
 #' # not run because it requires an internet connection
-#' current_surveys <- list_surveys()
-#' polymod_url <- subset(current_surveys, grepl("POLYMOD", title))[["url"]]
-#' # "https://doi.org/10.5281/zenodo.3874557"
+#' polymod_url <- "https://doi.org/10.5281/zenodo.3874557"
 #' polymod <- get_survey(polymod_url)
 #' polymod
 #' survey_countries(polymod)
