@@ -22,8 +22,9 @@
 #' @export
 get_citation <- function(x) {
   survey <- get_survey(x)
-  if (is.null(x$reference))
+  if (is.null(x$reference)) {
     stop("No citation defined for ", ifelse(is.null(x$name), "survey", x$name))
+  }
 
   ref <- c(
     list(header = gettextf("To cite %s in publications use:", x$ref$title)),

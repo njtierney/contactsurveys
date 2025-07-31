@@ -1,4 +1,5 @@
-#' Get a survey, either from its Zenodo repository, a set of files, or a survey variable
+#' Get a survey, either from its Zenodo repository, a set of files, or a survey
+#'   variable
 #'
 #' Downloads survey data, or extracts them from files, and returns a clean data
 #'   set. If a survey URL is accessed multiple times, the data will be cached
