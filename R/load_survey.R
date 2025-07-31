@@ -154,7 +154,8 @@ load_survey <- function(files, ...) {
               basename(file),
               " into '",
               type,
-              "' survey."
+              "' survey.",
+              call. = FALSE
             )
           }
           unmatched_merge <- nrow(contact_data[[file]]) - matched_main
@@ -165,7 +166,8 @@ load_survey <- function(files, ...) {
               basename(file),
               " into '",
               type,
-              "' survey."
+              "' survey.",
+              call. = FALSE
             )
           }
           main_surveys[[type]] <- merged[, !"..merge_id"]
@@ -197,7 +199,7 @@ load_survey <- function(files, ...) {
 
   if (length(survey_files) > 0) {
     for (file in survey_files) {
-      warning("Could not merge ", file)
+      warning("Could not merge ", file, call. = FALSE)
     }
   }
 

@@ -92,7 +92,8 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
     warning(
       "Zenodo repository contains files with names that only differ by case. ",
       "This will cause unpredictable behaviour on case-insensitive file systems. ",
-      "Please contact the authors to get this fixed."
+      "Please contact the authors to get this fixed.",
+      call. = FALSE
     )
     data <- data[!duplicated(file_name)]
   }
