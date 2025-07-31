@@ -27,8 +27,8 @@ get_citation <- function(x) {
   }
 
   ref <- c(
-    list(header = gettextf("To cite %s in publications use:", x$ref$title)),
-    x$reference
+    list(header = gettextf("To cite %s in publications use:", survey$reference$title)),
+    survey$reference
   )
 
   bref <- do.call(bibentry, ref)
