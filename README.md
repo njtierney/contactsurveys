@@ -1,7 +1,11 @@
 
-# Download contacy surveys for use in infectious disease modelling in R
+# contactsurveys
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/epiforecasts/contactsurveys/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiforecasts/contactsurveys/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/epiforecasts/contactsurveys/graph/badge.svg)](https://app.codecov.io/gh/epiforecasts/contactsurveys)
 <!-- badges: end -->
 
 `contactsurveys` is an `R` package to download contacy survey data,
@@ -16,7 +20,7 @@ The current development version can be installed using the `remotes`
 package
 
 ``` r
-remotes::install_github("njtierney/contactsurveys")
+remotes::install_github("epiforecasts/contactsurveys")
 ```
 
 # Documentation
