@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_survey.R
 \name{get_survey}
 \alias{get_survey}
-\title{Get a survey, either from its Zenodo repository, a set of files, or a survey variable}
+\title{Get a survey, either from its Zenodo repository, a set of files, or a survey
+variable}
 \usage{
 get_survey(survey, clear_cache = FALSE, ...)
 }
