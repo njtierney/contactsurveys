@@ -1,0 +1,54 @@
+
+# Download contacy surveys for use in infectious disease modelling in R
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+`contactsurveys` is an `R` package to download contacy survey data,
+which can be used to derive social mixing matrices, see for example
+[socialmixr](https://github.com/epiforecasts/socialmixr).
+
+# Installation
+
+The package can be installed using
+
+The current development version can be installed using the `remotes`
+package
+
+``` r
+remotes::install_github("njtierney/contactsurveys")
+```
+
+# Documentation
+
+For information on how to use the contactsurveys package, see the
+[introduction vignette](TODO).
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+All contributions to this project are gratefully acknowledged using the
+[`allcontributors` package](https://github.com/ropensci/allcontributors)
+following the [allcontributors](https://allcontributors.org)
+specification. Contributions of any kind are welcome!
+
+### Code
+
+<a href="https://github.com/epiforecasts/contactsurveys/commits?author=sbfnk">sbfnk</a>,
+<a href="https://github.com/epiforecasts/contactsurveys/commits?author=Bisaloo">Bisaloo</a>,
+<a href="https://github.com/epiforecasts/contactsurveys/commits?author=njtierney">njtierney</a>,
+<a href="https://github.com/epiforecasts/contactsurveys/commits?author=lwillem">lwillem</a>,
+<a href="https://github.com/epiforecasts/contactsurveys/commits?author=Degoot-AM">Degoot-AM</a>,
+<a href="https://github.com/epiforecasts/contactsurveys/commits?author=jarvisc1">jarvisc1</a>,
+<a href="https://github.com/epiforecasts/contactsurveys/commits?author=alxsrobert">alxsrobert</a>
+
+### Issues
+
+<a href="https://github.com/epiforecasts/contactsurveys/issues?q=is%3Aissue+author%3Aavallecam">avallecam</a>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
