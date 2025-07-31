@@ -17,8 +17,8 @@
 #' list_surveys()
 #' peru_survey <- download_survey("https://doi.org/10.5281/zenodo.1095664")
 #' }
-#' @return a vector of filenames that can be used with [load_survey]
-#  @seealso load_survey
+#' @return a vector of filenames that can be used with [load_survey()]
+#' @seealso load_survey
 #' @export
 download_survey <- function(survey, dir = NULL, sleep = 1) {
   if (!is.character(survey) || length(survey) > 1) {
@@ -34,7 +34,11 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
     stop("'survey' is not a DOI or URL.")
   }
 
-  if (is.doi) url <- paste0("https://doi.org/", survey) else url <- survey
+  if (is.doi) {
+    url <- paste0("https://doi.org/", survey)
+  } else {
+    url <- survey
+  }
 
   temp_body <- GET(
     url,
@@ -46,7 +50,9 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
       packageVersion("contactsurveys")
     ))
   )
-  if (status_code(temp_body) == 404) stop("DOI '", survey, "' not found")
+  if (status_code(temp_body) == 404) {
+    stop("DOI '", survey, "' not found")
+  }
   if (http_error(temp_body)) {
     stop(
       "Could not fetch the resource. ",

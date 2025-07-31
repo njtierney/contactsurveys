@@ -7,7 +7,8 @@ clean <- function(x, ...) UseMethod("clean")
 #' @description Cleans survey data to work with the 'contact_matrix' function
 #'
 #' @param x a "contact_survey" object, created with [as_contact_survey()].
-#' @param participant.age.column the column in `x$participants` containing participants' age
+#' @param participant.age.column the column in `x$participants` containing
+#'   participants' age.
 #' @param ... ignored
 #' @importFrom data.table fcase
 #' @importFrom countrycode countrycode
@@ -15,13 +16,14 @@ clean <- function(x, ...) UseMethod("clean")
 #' @return a cleaned survey in the correct format
 #' @examples
 #' \dontrun{
-#' #' # not run because it requires an internet connection
+#' # not run because it requires an internet connection
 #' current_surveys <- list_surveys()
 #' polymod_url <- subset(current_surveys, grepl("POLYMOD", title))[["url"]]
 #' # "https://doi.org/10.5281/zenodo.3874557"
 #' polymod <- get_survey(polymod_url)
 #' polymod
-#' cleaned <- clean(polymod) # not really necessary as the 'polymod' data set has already been cleaned
+#' # not really necessary as the 'polymod' data set has already been cleaned
+#' cleaned <- clean(polymod)
 #' }
 #' @autoglobal
 #' @export

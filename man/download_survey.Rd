@@ -16,7 +16,7 @@ temporary directory}
 (passed on to \code{\link[base]{Sys.sleep}})}
 }
 \value{
-a vector of filenames that can be used with \link{load_survey}
+a vector of filenames that can be used with \code{\link[=load_survey]{load_survey()}}
 }
 \description{
 Downloads survey data
@@ -26,4 +26,7 @@ Downloads survey data
 list_surveys()
 peru_survey <- download_survey("https://doi.org/10.5281/zenodo.1095664")
 }
+}
+\seealso{
+load_survey
 }

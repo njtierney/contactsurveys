@@ -1,6 +1,7 @@
 #' Load a survey from local files
 #'
-#' @description Loads a survey from a local file system. Tables are expected as csv files, and a reference (if present) as JSON.
+#' @description Loads a survey from a local file system. Tables are expected
+#'   as csv files, and a reference (if present) as JSON.
 #' @param files a vector of file names as returned by [download_survey()]
 #' @param ... extra options (currently not used)
 #' @autoglobal

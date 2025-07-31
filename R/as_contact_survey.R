@@ -1,17 +1,21 @@
-#' @title Check contact survey data
+#' @title Check and coerce to contact survey data
 #'
-#' @description Checks that a survey fulfills all the requirements to work with the 'contact_matrix' function
+#' @description Checks if a survey fulfills all the requirements to work with
+#'   the 'contact_matrix' function.
 #'
-#' @param x list containing
+#' @param x list containing:
 #'  - an element named 'participants', a data frame containing participant
-#'   information
-#'  - an element named 'contacts', a data frame containing contact information
+#'   information.
+#'  - an element named 'contacts', a data frame containing contact information.
 #'  - (optionally) an element named 'reference, a list containing information
 #'   information needed to reference the survey, in particular it can contain$a
-#'   "title", "bibtype", "author", "doi", "publisher", "note", "year"
-#' @param id.column the column in both the `participants` and `contacts` data frames that links contacts to participants
-#' @param country.column the column in the `participants` data frame containing the country in which the participant was queried
-#' @param year.column the column in the `participants` data frame containing the year in which the participant was queried
+#'   "title", "bibtype", "author", "doi", "publisher", "note", "year".
+#' @param id.column the column in both the `participants` and `contacts` data
+#'   frames that links contacts to participants.
+#' @param country.column the column in the `participants` data frame containing
+#'   the country in which the participant was queried.
+#' @param year.column the column in the `participants` data frame containing
+#'   the year in which the participant was queried.
 #' @importFrom checkmate assert_list assert_names assert_data_frame
 #'   assert_character
 #' @importFrom purrr walk
@@ -76,7 +80,11 @@ as_contact_survey <- function(
     warning("No reference provided")
   }
 
-  survey <- new_contact_survey(x$participant, x$contacts, x$reference)
+  survey <- new_contact_survey(
+    participants = x$participant,
+    contacts = x$contacts,
+    reference = x$reference
+  )
   survey <- clean(survey)
 
   return(survey)

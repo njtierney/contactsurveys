@@ -2,7 +2,7 @@
 % Please edit documentation in R/as_contact_survey.R
 \name{as_contact_survey}
 \alias{as_contact_survey}
-\title{Check contact survey data}
+\title{Check and coerce to contact survey data}
 \usage{
 as_contact_survey(
   x,
@@ -12,27 +12,31 @@ as_contact_survey(
 )
 }
 \arguments{
-\item{x}{list containing
+\item{x}{list containing:
 \itemize{
 \item an element named 'participants', a data frame containing participant
-information
-\item an element named 'contacts', a data frame containing contact information
+information.
+\item an element named 'contacts', a data frame containing contact information.
 \item (optionally) an element named 'reference, a list containing information
 information needed to reference the survey, in particular it can contain$a
-"title", "bibtype", "author", "doi", "publisher", "note", "year"
+"title", "bibtype", "author", "doi", "publisher", "note", "year".
 }}
 
-\item{id.column}{the column in both the \code{participants} and \code{contacts} data frames that links contacts to participants}
+\item{id.column}{the column in both the \code{participants} and \code{contacts} data
+frames that links contacts to participants.}
 
-\item{country.column}{the column in the \code{participants} data frame containing the country in which the participant was queried}
+\item{country.column}{the column in the \code{participants} data frame containing
+the country in which the participant was queried.}
 
-\item{year.column}{the column in the \code{participants} data frame containing the year in which the participant was queried}
+\item{year.column}{the column in the \code{participants} data frame containing
+the year in which the participant was queried.}
 }
 \value{
 invisibly returns a character vector of the relevant columns
 }
 \description{
-Checks that a survey fulfills all the requirements to work with the 'contact_matrix' function
+Checks if a survey fulfills all the requirements to work with
+the 'contact_matrix' function.
 }
 \examples{
 \dontrun{
