@@ -48,7 +48,7 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
   )
 
   temp_body <- GET(
-    url,
+    survey_url,
     config = config(
       followlocation = 1
     ),
