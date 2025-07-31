@@ -36,9 +36,9 @@ get_survey <- function(survey, clear_cache = FALSE, ...) {
 
 #' Internal function to get survey data
 #' @autoglobal
-#' @param survey a DOI or url to get the survey from, or a for a
-#'   `contact_survey` object, created with [as_contact_survey()], object (in
-#'   which case only cleaning is done).
+#' @param survey a DOI or url to get the survey from, or for a `contact_survey`
+#'   object, created with [as_contact_survey()], object (in which case only
+#'   cleaning is done).
 #' @param ... extra options (currently not used)
 #' @importFrom data.table copy
 #' @keywords internal

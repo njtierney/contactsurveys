@@ -8,9 +8,9 @@ variable}
 get_survey(survey, clear_cache = FALSE, ...)
 }
 \arguments{
-\item{survey}{a DOI or url to get the survey from, or a for a
-\code{contact_survey} object, created with \code{\link[=as_contact_survey]{as_contact_survey()}}, object (in
-which case only cleaning is done).}
+\item{survey}{a DOI or url to get the survey from, or for a \code{contact_survey}
+object, created with \code{\link[=as_contact_survey]{as_contact_survey()}}, object (in which case only
+cleaning is done).}
 
 \item{clear_cache}{logical, whether to clear the cache before downloading
 the survey; by default, the cache is not cleared and so multiple calls of

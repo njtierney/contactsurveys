@@ -28,5 +28,5 @@ peru_survey <- download_survey("https://doi.org/10.5281/zenodo.1095664")
 }
 }
 \seealso{
-load_survey
+\code{\link[=load_survey]{load_survey()}}
 }

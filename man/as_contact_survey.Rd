@@ -17,8 +17,8 @@ as_contact_survey(
 \item an element named 'participants', a data frame containing participant
 information.
 \item an element named 'contacts', a data frame containing contact information.
-\item (optionally) an element named 'reference, a list containing information
-information needed to reference the survey, in particular it can contain$a
+\item (optionally) an element named 'reference', a list containing information
+information needed to reference the survey, in particular it can contain:
 "title", "bibtype", "author", "doi", "publisher", "note", "year".
 }}
 

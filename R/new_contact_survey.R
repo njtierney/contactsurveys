@@ -6,8 +6,8 @@
 #' @param participants a `data.frame` containing information on participants
 #' @param contacts a `data.frame` containing information on contacts
 #' @param reference a `list` containing information needed to reference the
-#'   survey, in particular it can contain$a "title", "bibtype", "author",
-#'   "doi", "publisher", "note", "year".
+#'   survey, in particular it can contain: "title", "bibtype", "author", "doi",
+#'   "publisher", "note", "year".
 #' @return a new survey object
 #' @author Sebastian Funk
 #' @keywords internal
