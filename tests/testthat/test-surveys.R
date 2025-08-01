@@ -30,8 +30,10 @@ test_that("missing surveys can't be cited", {
 })
 
 test_that("multiple DOI's cannot be loaded", {
+  # nolint start
   expect_error(suppressMessages(suppressWarnings(get_survey(c(
     "10.5281/zenodo.1095664",
     "10.5281/zenodo.1127693"
-  ))))) # nolint
+  )))))
+  # nolint end
 })

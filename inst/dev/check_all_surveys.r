@@ -6,9 +6,7 @@ library(here)
 survey_files <- readRDS(here("surveys", "survey_files.rds"))
 
 ## define safe checking function
-safe_as_contact_survey <- safely(\(files) {
-  as_contact_survey(load_survey(files))
-})
+safe_as_contact_survey <- safely(\(files) as_contact_survey(load_survey(files)))
 
 ## check all surveys
 checks <- map(survey_files, safe_as_contact_survey)

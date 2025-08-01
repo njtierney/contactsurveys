@@ -17,13 +17,13 @@
 #' @export
 load_survey <- function(files, ...) {
   exist <- file.exists(files)
-  missing <- files[!exist]
-  if (length(missing) > 0) {
+  files_missing <- files[!exist]
+  if (length(files_missing) > 0) {
     stop(
       "File",
-      ifelse(length(missing) > 1, "s", ""),
+      ifelse(length(files_missing) > 1, "s", ""),
       " ",
-      paste(paste0("'", missing, "'", collapse = ""), sep = ", "),
+      paste(paste0("'", files_missing, "'", collapse = ""), sep = ", "),
       " not found.",
       call. = FALSE
     )
@@ -219,5 +219,5 @@ load_survey <- function(files, ...) {
     )
   }
 
-  return(new_survey)
+  new_survey
 }
