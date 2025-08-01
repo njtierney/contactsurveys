@@ -74,7 +74,8 @@ as_contact_survey <- function(
           "in the participant data frame",
           call. = FALSE
         )
-      } else {
+      } else if (name_provided) {
+        # rename only when a column name was provided
         setnames(x$participants, col_name, column)
       }
     }
