@@ -57,23 +57,28 @@ as_contact_survey <- function(
     year = year.column
   )
 
-  walk(names(to_check), \(column) {
-    if (
-      !is.null(to_check[[column]]) &&
-        !(to_check[[column]] %in% colnames(x$participants))
-    ) {
-      stop(
-        column,
-        " column '",
-        to_check[[column]],
-        "' does not exist ",
-        "in the participant data frame",
-        call. = FALSE
-      )
-    } else {
-      setnames(x$participants, to_check[[column]], column)
+  walk(
+    .x = names(to_check),
+    .f = function(column) {
+      col_name <- to_check[[column]]
+      name_provided <- !is.null(col_name)
+      name_not_in_participants <- !(col_name %in% colnames(x$participants))
+      column_not_in_participants <- name_provided && name_not_in_participants
+
+      if (column_not_in_participants) {
+        stop(
+          column,
+          " column '",
+          col_name,
+          "' does not exist ",
+          "in the participant data frame",
+          call. = FALSE
+        )
+      } else {
+        setnames(x$participants, col_name, column)
+      }
     }
-  })
+  )
 
   if (is.null(x$reference)) {
     warning("No reference provided", call. = FALSE)
