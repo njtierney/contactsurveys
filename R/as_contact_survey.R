@@ -1,17 +1,21 @@
-#' @title Check contact survey data
+#' @title Check and coerce to contact survey data
 #'
-#' @description Checks that a survey fulfills all the requirements to work with the 'contact_matrix' function
+#' @description Checks if a survey fulfills all the requirements to work with
+#'   the 'contact_matrix' function.
 #'
-#' @param x list containing
+#' @param x list containing:
 #'  - an element named 'participants', a data frame containing participant
-#'   information
-#'  - an element named 'contacts', a data frame containing contact information
-#'  - (optionally) an element named 'reference, a list containing information
-#'   information needed to reference the survey, in particular it can contain$a
-#'   "title", "bibtype", "author", "doi", "publisher", "note", "year"
-#' @param id.column the column in both the `participants` and `contacts` data frames that links contacts to participants
-#' @param country.column the column in the `participants` data frame containing the country in which the participant was queried
-#' @param year.column the column in the `participants` data frame containing the year in which the participant was queried
+#'   information.
+#'  - an element named 'contacts', a data frame containing contact information.
+#'  - (optionally) an element named 'reference', a list containing information
+#'   information needed to reference the survey, in particular it can contain:
+#'   "title", "bibtype", "author", "doi", "publisher", "note", "year".
+#' @param id.column the column in both the `participants` and `contacts` data
+#'   frames that links contacts to participants.
+#' @param country.column the column in the `participants` data frame containing
+#'   the country in which the participant was queried.
+#' @param year.column the column in the `participants` data frame containing
+#'   the year in which the participant was queried.
 #' @importFrom checkmate assert_list assert_names assert_data_frame
 #'   assert_character
 #' @importFrom purrr walk
@@ -20,9 +24,7 @@
 #' @examples
 #' \dontrun{
 #' # not run because it requires an internet connection
-#' current_surveys <- list_surveys()
-#' polymod_url <- subset(current_surveys, grepl("POLYMOD", title))[["url"]]
-#' # "https://doi.org/10.5281/zenodo.3874557"
+#' polymod_url <- "https://doi.org/10.5281/zenodo.3874557"
 #' polymod <- get_survey(polymod_url)
 #' polymod
 #' as_contact_survey(polymod)
@@ -65,7 +67,8 @@ as_contact_survey <- function(
         " column '",
         to_check[[column]],
         "' does not exist ",
-        "in the participant data frame"
+        "in the participant data frame",
+        call. = FALSE
       )
     } else {
       setnames(x$participants, to_check[[column]], column)
@@ -73,10 +76,14 @@ as_contact_survey <- function(
   })
 
   if (is.null(x$reference)) {
-    warning("No reference provided")
+    warning("No reference provided", call. = FALSE)
   }
 
-  survey <- new_contact_survey(x$participant, x$contacts, x$reference)
+  survey <- new_contact_survey(
+    participants = x$participants,
+    contacts = x$contacts,
+    reference = x$reference
+  )
   survey <- clean(survey)
 
   return(survey)

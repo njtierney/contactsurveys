@@ -25,16 +25,16 @@ list_surveys <- function(clear_cache = FALSE) {
 .list_surveys <- function() {
   record_list <-
     data.table(list_records(
-      "https://zenodo.org/oai2d",
+      url = "https://zenodo.org/oai2d",
       metadataPrefix = "oai_datacite",
       set = "user-social_contact_data"
     ))
   ## find common DOI for different versions, i.e. the "relation" that is a DOI
   relations <- grep("^relation(\\.|$)", colnames(record_list), value = TRUE)
   DOIs <- apply(
-    record_list,
-    1,
-    function(x) {
+    X = record_list,
+    MARGIN = 1,
+    FUN = function(x) {
       min(grep("^https://doi.org/.*zenodo", x[relations], value = TRUE))
     }
   )
@@ -71,9 +71,7 @@ list_surveys <- function(clear_cache = FALSE) {
 #' @examples
 #' \dontrun{
 #' # not run because it requires an internet connection
-#' current_surveys <- list_surveys()
-#' polymod_url <- subset(current_surveys, grepl("POLYMOD", title))[["url"]]
-#' # "https://doi.org/10.5281/zenodo.3874557"
+#' polymod_url <- "https://doi.org/10.5281/zenodo.3874557"
 #' polymod <- get_survey(polymod_url)
 #' polymod
 #' survey_countries(polymod)

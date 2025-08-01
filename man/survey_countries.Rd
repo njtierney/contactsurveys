@@ -7,8 +7,9 @@
 survey_countries(survey, country.column = "country", ...)
 }
 \arguments{
-\item{survey}{a DOI or url to get the survey from, or a for a "contact_survey" object, created
-with \code{\link[=as_contact_survey]{as_contact_survey()}}, object (in which case only cleaning is done).}
+\item{survey}{a DOI or url to get the survey from, or for a \code{contact_survey}
+object, created with \code{\link[=as_contact_survey]{as_contact_survey()}}, object (in which case only
+cleaning is done).}
 
 \item{country.column}{column in the survey indicating the country}
 
@@ -23,9 +24,7 @@ List all countries contained in a survey
 \examples{
 \dontrun{
 # not run because it requires an internet connection
-current_surveys <- list_surveys()
-polymod_url <- subset(current_surveys, grepl("POLYMOD", title))[["url"]]
-# "https://doi.org/10.5281/zenodo.3874557"
+polymod_url <- "https://doi.org/10.5281/zenodo.3874557"
 polymod <- get_survey(polymod_url)
 polymod
 survey_countries(polymod)

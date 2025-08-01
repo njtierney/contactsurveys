@@ -10,9 +10,7 @@
 #' @examples
 #' \dontrun{
 #' # not run because it requires an internet connection
-#' current_surveys <- list_surveys()
-#' polymod_url <- subset(current_surveys, grepl("POLYMOD", title))[["url"]]
-#' # "https://doi.org/10.5281/zenodo.3874557"
+#' polymod_url <- "https://doi.org/10.5281/zenodo.3874557"
 #' polymod <- get_survey(polymod_url)
 #' polymod
 #' citation <- get_citation(polymod)
@@ -22,14 +20,23 @@
 #' @export
 get_citation <- function(x) {
   survey <- get_survey(x)
-  if (is.null(x$reference))
-    stop("No citation defined for ", ifelse(is.null(x$name), "survey", x$name))
-
-  ref <-
-    c(
-      list(header = gettextf("To cite %s in publications use:", x$ref$title)),
-      x$reference
+  if (is.null(x$reference)) {
+    stop(
+      "No citation defined for ",
+      ifelse(is.null(x$name), "survey", x$name),
+      call. = FALSE
     )
+  }
+
+  ref <- c(
+    list(
+      header = gettextf(
+        "To cite %s in publications use:",
+        survey$reference$title
+      )
+    ),
+    survey$reference
+  )
 
   bref <- do.call(bibentry, ref)
 

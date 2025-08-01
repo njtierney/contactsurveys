@@ -17,12 +17,12 @@
 #' list_surveys()
 #' peru_survey <- download_survey("https://doi.org/10.5281/zenodo.1095664")
 #' }
-#' @return a vector of filenames that can be used with [load_survey]
-#  @seealso load_survey
+#' @return a vector of filenames that can be used with [load_survey()]
+#' @seealso [load_survey()]
 #' @export
 download_survey <- function(survey, dir = NULL, sleep = 1) {
   if (!is.character(survey) || length(survey) > 1) {
-    stop("'survey' must be a character of length 1")
+    stop("'survey' must be a character of length 1", call. = FALSE)
   }
 
   survey <- sub("^(https?:\\/\\/(dx\\.)?doi\\.org\\/|doi:)", "", survey)
@@ -31,13 +31,24 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
   is.url <- is.doi || grepl("^https?:\\/\\/", survey)
 
   if (!is.url) {
-    stop("'survey' is not a DOI or URL.")
+    stop("'survey' is not a DOI or URL.", call. = FALSE)
   }
 
-  if (is.doi) url <- paste0("https://doi.org/", survey) else url <- survey
+  if (is.doi) {
+    survey_url <- paste0("https://doi.org/", survey)
+  } else {
+    survey_url <- survey
+  }
 
   temp_body <- GET(
-    url,
+    survey_url,
+    config = config(
+      followlocation = 1
+    )
+  )
+
+  temp_body <- GET(
+    survey_url,
     config = config(
       followlocation = 1
     ),
@@ -46,11 +57,14 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
       packageVersion("contactsurveys")
     ))
   )
-  if (status_code(temp_body) == 404) stop("DOI '", survey, "' not found")
+  if (status_code(temp_body) == 404) {
+    stop("DOI '", survey, "' not found", call. = FALSE)
+  }
   if (http_error(temp_body)) {
     stop(
       "Could not fetch the resource. ",
-      "This could an issue with the website server or your own connection."
+      "This could an issue with the website server or your own connection.",
+      call. = FALSE
     )
   }
 
@@ -73,7 +87,7 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
   reference[[ifelse(is.doi, "doi", "url")]] <- survey
 
   links <- xml_attr(
-    xml_find_all(parsed_body, "//link[@type=\"text/csv\"]"),
+    xml_find_all(parsed_body, "//link[@type='text/csv']"),
     "href"
   )
 
@@ -85,7 +99,8 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
     warning(
       "Zenodo repository contains files with names that only differ by case. ",
       "This will cause unpredictable behaviour on case-insensitive file systems. ",
-      "Please contact the authors to get this fixed."
+      "Please contact the authors to get this fixed.",
+      call. = FALSE
     )
     data <- data[!duplicated(file_name)]
   }

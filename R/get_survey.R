@@ -1,10 +1,20 @@
-#' Get a survey, either from its Zenodo repository, a set of files, or a survey variable
-#
+#' Get a survey, either from its Zenodo repository, a set of files, or a survey
+#'   variable
 #'
-#' Downloads survey data, or extracts them from files, and returns a clean data set. If a survey URL is accessed multiple times, the data will be cached (unless `clear_cache` is set to `TRUE`) to avoid repeated downloads.
+#' Downloads survey data, or extracts them from files, and returns a clean data
+#'   set. If a survey URL is accessed multiple times, the data will be cached
+#'   (unless `clear_cache` is set to `TRUE`) to avoid repeated downloads.
 #'
-#' If survey objects are used repeatedly the downloaded files can be saved and reloaded between sessions then survey objects can be saved/loaded using [base::saveRDS()] and [base::readRDS()], or via the individual survey files that can be downloaded using [download_survey()] and subsequently loaded using [load_survey()].
-#' @param clear_cache logical, whether to clear the cache before downloading the survey; by default, the cache is not cleared and so multiple calls of this function to access the same survey will not result in repeated downloads
+#' If survey objects are used repeatedly the downloaded files can be saved and
+#'   reloaded between sessions then survey objects can be saved/loaded using
+#'   [base::saveRDS()] and [base::readRDS()], or via the individual survey
+#'   files that can be downloaded using [download_survey()] and subsequently
+#'   loaded using [load_survey()].
+#'
+#' @param clear_cache logical, whether to clear the cache before downloading
+#'   the survey; by default, the cache is not cleared and so multiple calls of
+#'   this function to access the same survey will not result in repeated
+#'   downloads.
 #' @inheritParams .get_survey
 #' @importFrom memoise memoise
 #' @examples
@@ -26,21 +36,23 @@ get_survey <- function(survey, clear_cache = FALSE, ...) {
 
 #' Internal function to get survey data
 #' @autoglobal
-#' @param survey a DOI or url to get the survey from, or a for a "contact_survey" object, created
-#'   with [as_contact_survey()], object (in which case only cleaning is done).
+#' @param survey a DOI or url to get the survey from, or for a `contact_survey`
+#'   object, created with [as_contact_survey()], object (in which case only
+#'   cleaning is done).
 #' @param ... extra options (currently not used)
 #' @importFrom data.table copy
 #' @keywords internal
 .get_survey <- function(survey, ...) {
   if (inherits(survey, "contact_survey")) {
     new_survey <- copy(survey)
+  } else if (is.character(survey)) {
+    files <- download_survey(survey)
+    new_survey <- load_survey(files)
   } else {
-    if (is.character(survey)) {
-      files <- download_survey(survey)
-      new_survey <- load_survey(files)
-    } else {
-      stop("'survey' must be an 'contact_survey' object or character")
-    }
+    stop(
+      "'survey' must be an 'contact_survey' object or character",
+      call. = FALSE
+    )
   }
 
   return(new_survey)

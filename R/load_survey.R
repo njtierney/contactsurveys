@@ -1,6 +1,7 @@
 #' Load a survey from local files
 #'
-#' @description Loads a survey from a local file system. Tables are expected as csv files, and a reference (if present) as JSON.
+#' @description Loads a survey from a local file system. Tables are expected
+#'   as csv files, and a reference (if present) as JSON.
 #' @param files a vector of file names as returned by [download_survey()]
 #' @param ... extra options (currently not used)
 #' @autoglobal
@@ -23,7 +24,8 @@ load_survey <- function(files, ...) {
       ifelse(length(missing) > 1, "s", ""),
       " ",
       paste(paste0("'", missing, "'", collapse = ""), sep = ", "),
-      " not found."
+      " not found.",
+      call. = FALSE
     )
   }
   survey_files <- grep("csv$", files, value = TRUE) # select csv files
@@ -53,7 +55,8 @@ load_survey <- function(files, ...) {
         "_",
         type,
         "_common.csv",
-        ", but no such file found."
+        ", but no such file found.",
+        call. = FALSE
       )
     }
     main_surveys[[type]] <- rbindlist(contact_data[main_file], fill = TRUE)
@@ -123,7 +126,7 @@ load_survey <- function(files, ...) {
           },
           error = function(cond) {
             if (!grepl("cartesian", cond$message, fixed = TRUE)) {
-              stop(cond$message)
+              stop(cond$message, call. = FALSE)
             }
             NULL
           }
@@ -151,7 +154,8 @@ load_survey <- function(files, ...) {
               basename(file),
               " into '",
               type,
-              "' survey."
+              "' survey.",
+              call. = FALSE
             )
           }
           unmatched_merge <- nrow(contact_data[[file]]) - matched_main
@@ -162,7 +166,8 @@ load_survey <- function(files, ...) {
               basename(file),
               " into '",
               type,
-              "' survey."
+              "' survey.",
+              call. = FALSE
             )
           }
           main_surveys[[type]] <- merged[, !"..merge_id"]
@@ -194,7 +199,7 @@ load_survey <- function(files, ...) {
 
   if (length(survey_files) > 0) {
     for (file in survey_files) {
-      warning("Could not merge ", file)
+      warning("Could not merge ", file, call. = FALSE)
     }
   }
 

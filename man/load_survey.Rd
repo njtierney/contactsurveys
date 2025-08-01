@@ -15,7 +15,8 @@ load_survey(files, ...)
 a survey in the correct format
 }
 \description{
-Loads a survey from a local file system. Tables are expected as csv files, and a reference (if present) as JSON.
+Loads a survey from a local file system. Tables are expected
+as csv files, and a reference (if present) as JSON.
 }
 \examples{
 \dontrun{
