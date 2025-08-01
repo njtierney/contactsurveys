@@ -40,5 +40,5 @@ get_citation <- function(x) {
 
   bref <- do.call(bibentry, ref)
 
-  return(bref)
+  bref
 }

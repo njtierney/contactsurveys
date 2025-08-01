@@ -55,5 +55,5 @@ get_survey <- function(survey, clear_cache = FALSE, ...) {
     )
   }
 
-  return(new_survey)
+  new_survey
 }

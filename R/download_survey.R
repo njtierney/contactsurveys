@@ -91,18 +91,18 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
     "href"
   )
 
-  data <- data.table(url = links)
+  zenodo_links <- data.table(url = links)
   ## only download csv files
-  data[, file_name := tolower(basename(url))]
+  zenodo_links[, file_name := tolower(basename(url))]
 
-  if (anyDuplicated(data$file_name) > 0) {
+  if (anyDuplicated(zenodo_links$file_name) > 0) {
     warning(
       "Zenodo repository contains files with names that only differ by case. ",
       "This will cause unpredictable behaviour on case-insensitive file systems. ",
       "Please contact the authors to get this fixed.",
       call. = FALSE
     )
-    data <- data[!duplicated(file_name)]
+    zenodo_links <- zenodo_links[!duplicated(file_name)]
   }
 
   if (is.null(dir)) {
@@ -111,7 +111,7 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
 
   message("Getting ", parsed_cite$name, ".")
 
-  lcs <- find_common_prefix(data$file_name)
+  lcs <- find_common_prefix(zenodo_links$file_name)
   reference_file_path <- file.path(dir, paste0(lcs, "reference.json"))
   reference_json <- toJSON(reference)
   write(reference_json, reference_file_path)
@@ -119,14 +119,14 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
   files <- c(
     reference_file_path,
     vapply(
-      seq_len(nrow(data)),
+      seq_len(nrow(zenodo_links)),
       function(i) {
-        url <- data[i, ]$url
-        temp <- file.path(dir, data[i, ]$file_name)
-        message("Downloading ", url)
+        zenodo_url <- zenodo_links[i, ]$url
+        temp <- file.path(dir, zenodo_links[i, ]$file_name)
+        message("Downloading ", zenodo_url)
         Sys.sleep(sleep)
-        dl <- curl_download(url, temp)
-        return(temp)
+        dl <- curl_download(zenodo_url, temp)
+        temp
       },
       ""
     )
@@ -138,19 +138,19 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
 find_common_prefix <- function(vec) {
   # find initial longest common subequence of file names
   i <- 1
-  end <- FALSE
+  finish <- FALSE
   lcs <- ""
-  while (!end) {
+  while (!finish) {
     initial_bits <- vapply(vec, substr, start = 1, stop = i, "x")
     if (length(unique(initial_bits)) > 1) {
-      end <- TRUE
+      finish <- TRUE
     } else {
       lcs <- unique(initial_bits)
       i <- i + 1
     }
   }
 
-  return(lcs)
+  lcs
 }
 
 ##' Checks if a character string is a DOI
