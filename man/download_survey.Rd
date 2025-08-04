@@ -8,7 +8,7 @@ download_survey(
   survey,
   directory = tempdir(),
   verbose = TRUE,
-  overwrite = FALSE,
+  overwrite = TRUE,
   timeout = 60
 )
 }
@@ -27,7 +27,7 @@ seconds.}
 temporary directory}
 }
 \value{
-a vector of filenames that can be used with \code{\link[=load_survey]{load_survey()}}
+a vector of filenames, where the surveys were downloaded
 }
 \description{
 Downloads survey data
@@ -39,5 +39,5 @@ peru_survey <- download_survey("https://doi.org/10.5281/zenodo.1095664")
 }
 }
 \seealso{
-\code{\link[=load_survey]{load_survey()}}
+\code{\link[=list_surveys]{list_surveys()}}
 }

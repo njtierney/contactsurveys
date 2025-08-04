@@ -11,7 +11,7 @@
 #' @param timeout A numeric value specifying timeout in seconds. Default 60
 #'  seconds.
 #'
-#' @return a vector of filenames that can be used with [load_survey()]
+#' @return a vector of filenames, where the surveys were downloaded
 #'
 #' @autoglobal
 #' @examples
@@ -19,7 +19,7 @@
 #' list_surveys()
 #' peru_survey <- download_survey("https://doi.org/10.5281/zenodo.1095664")
 #' }
-#' @seealso [load_survey()]
+#' @seealso [list_surveys()]
 #' @export
 download_survey <- function(
   survey,
