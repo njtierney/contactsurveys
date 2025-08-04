@@ -4,7 +4,7 @@
 \alias{download_survey}
 \title{Download a survey from its Zenodo repository}
 \usage{
-download_survey(survey, dir = NULL, sleep = 1)
+download_survey(survey, dir = NULL, sleep = 1, overwrite = FALSE)
 }
 \arguments{
 \item{survey}{a URL (see \code{\link[=list_surveys]{list_surveys()}})}
