@@ -116,22 +116,23 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
   reference_file_path <- file.path(dir, paste0(lcs, "reference.json"))
   reference_json <- toJSON(reference)
   write(reference_json, reference_file_path)
+  zenodo_url <- zenodo_links$url
+  temp <- file.path(dir, zenodo_links$file_name)
 
-  files <- c(
-    reference_file_path,
-    vapply(
-      seq_len(nrow(zenodo_links)),
-      function(i) {
-        zenodo_url <- zenodo_links[i, ]$url
-        temp <- file.path(dir, zenodo_links[i, ]$file_name)
-        message("Downloading ", zenodo_url)
-        Sys.sleep(sleep)
-        dl <- curl_download(zenodo_url, temp)
-        temp
-      },
-      ""
-    )
+  dl <- curl::multi_download(
+    urls = zenodo_url,
+    destfiles = temp,
+    progress = TRUE
   )
+
+  all_success <- all(dl$success)
+
+  if (!all_success) {
+    .dl_error <<- dl
+    stop("Error downloading files, see `.dl_error` for more information")
+  }
+
+  files <- temp
 
   return(files)
 }
