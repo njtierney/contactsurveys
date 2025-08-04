@@ -20,7 +20,7 @@
 #' @return a vector of filenames that can be used with [load_survey()]
 #' @seealso [load_survey()]
 #' @export
-download_survey <- function(survey, dir = NULL, sleep = 1) {
+download_survey <- function(survey, dir = NULL, sleep = 1, overwrite = FALSE) {
   if (!is.character(survey) || length(survey) > 1) {
     stop("'survey' must be a character of length 1", call. = FALSE)
   }
@@ -106,28 +106,42 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
     zenodo_links <- zenodo_links[!duplicated(file_name)]
   }
 
-  if (is.null(dir)) {
-    dir <- tempdir()
+  dir <- dir %||% get_pkg_user_dir()
+
+  # add the directory
+  # assuming that `survey` is a DOI like "10.5281/zenodo.1095664"
+  dir_doi <- gsub("/", "_", gsub("\\.", "-", survey))
+
+  dir_name <- file.path(dir, dir_doi)
+  # maybe take a look at usethis:::check_files_absent for this pattern
+  if (!dir.exists(dir_name)) {
+    dir.create(dir_name, recursive = TRUE)
+  } else if (dir.exists(dir_name) && !overwrite) {
+    stop("Files already exist, use `overwrite = TRUE` to overwrite.")
   }
 
   message("Getting ", parsed_cite$name, ".")
 
   lcs <- find_common_prefix(zenodo_links$file_name)
-  reference_file_path <- file.path(dir, paste0(lcs, "reference.json"))
+  reference_file_path <- file.path(dir_name, paste0(lcs, "reference.json"))
   reference_json <- toJSON(reference)
   write(reference_json, reference_file_path)
+
+  zenodo_url <- zenodo_links$url
+  download_path <- file.path(dir_name, zenodo_links$file_name)
 
   files <- c(
     reference_file_path,
     vapply(
       seq_len(nrow(zenodo_links)),
       function(i) {
-        zenodo_url <- zenodo_links[i, ]$url
-        temp <- file.path(dir, zenodo_links[i, ]$file_name)
         message("Downloading ", zenodo_url)
         Sys.sleep(sleep)
-        dl <- curl_download(zenodo_url, temp)
-        temp
+        dl <- curl_download(
+          url = zenodo_url,
+          destfile = download_path
+        )
+        download_path
       },
       ""
     )
