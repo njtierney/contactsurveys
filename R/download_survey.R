@@ -86,10 +86,11 @@ download_survey <- function(survey, dir = NULL, sleep = 1) {
   }
   reference[[ifelse(is.doi, "doi", "url")]] <- survey
 
-  links <- xml_attr(
-    xml_find_all(parsed_body, "//link[@type='text/csv']"),
-    "href"
-  )
+  links <- xml_find_all(
+    parsed_body,
+    "//link[@type='text/csv' and @rel='item']"
+  ) |>
+    xml_attr("href")
 
   zenodo_links <- data.table(url = links)
   ## only download csv files
