@@ -21,6 +21,7 @@ test_that("multiple DOI's cannot be loaded", {
   skip_if_offline("zenodo.org")
   skip_on_cran()
   # nolint start
+  doi_peru <- "10.5281/zenodo.1095664"
   doi_zimbabwe <- "10.5281/zenodo.1127693"
   expect_error(suppressMessages(download_survey(c(
     doi_peru,
