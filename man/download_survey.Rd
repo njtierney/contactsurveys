@@ -6,7 +6,7 @@
 \usage{
 download_survey(
   survey,
-  dir = tempdir(),
+  directory = tempdir(),
   verbose = TRUE,
   overwrite = FALSE,
   timeout = 60
@@ -15,9 +15,6 @@ download_survey(
 \arguments{
 \item{survey}{A URL (see \code{\link[=list_surveys]{list_surveys()}})}
 
-\item{dir}{a directory to save the files to; if not given, will save to a
-temporary directory}
-
 \item{verbose}{Whether downloads should be echoed to output. Default TRUE.}
 
 \item{overwrite}{If files should be overwritten if they already exist.
@@ -25,6 +22,9 @@ Default TRUE.}
 
 \item{timeout}{A numeric value specifying timeout in seconds. Default 60
 seconds.}
+
+\item{dir}{a directory to save the files to; if not given, will save to a
+temporary directory}
 }
 \value{
 a vector of filenames that can be used with \code{\link[=load_survey]{load_survey()}}
