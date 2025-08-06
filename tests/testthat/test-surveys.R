@@ -9,12 +9,12 @@ test_that("surveys can be downloaded", {
   skip_if_offline("zenodo.org")
   skip_on_cran()
 
-  doi_peru <- "10.5281/zenodo.1095664"
+  doi_peru <- "10.5281/zenodo.1095664" # nolint
   peru_survey_files <- suppressMessages(download_survey(doi_peru)) # nolint
 
   expect_true(all(file.exists(peru_survey_files)))
   # expect contains peru
-  expect_true(all(grepl("peru", basename(peru_survey_files))))
+  expect_true(all(grepl("peru", basename(peru_survey_files), fixed = TRUE)))
 })
 
 test_that("multiple DOI's cannot be loaded", {
