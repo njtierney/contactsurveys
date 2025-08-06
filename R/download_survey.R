@@ -25,7 +25,7 @@ download_survey <- function(
   survey,
   directory = tempdir(),
   verbose = TRUE,
-  overwrite = FALSE,
+  overwrite = TRUE,
   timeout = 60
 ) {
   if (!is.character(survey) || length(survey) > 1) {
@@ -58,7 +58,7 @@ download_survey <- function(
     overwrite = overwrite,
     timeout = timeout
   )
-  downloaded_files <- list.files(dir)
+  downloaded_files <- list.files(directory)
 
   downloaded_files
 }
