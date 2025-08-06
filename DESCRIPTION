@@ -29,7 +29,8 @@ Imports:
     memoise,
     oai,
     purrr,
-    xml2
+    xml2,
+    zen4R
 Suggests:
     knitr,
     rmarkdown,

@@ -4,26 +4,25 @@
 \alias{get_citation}
 \title{Citation for a survey}
 \usage{
-get_citation(x)
+get_citation(doi, style = "apa", ...)
 }
 \arguments{
-\item{x}{a character vector of surveys to cite}
+\item{doi}{A DOI.}
+
+\item{style}{Optional. Citation style.}
+
+\item{...}{Passed to \code{zen4R::get_citation()}.}
 }
 \value{
-citation as bibentry
+A citation. Prints a message with citation instructions.
 }
 \description{
-Gets a full citation for a "contact_survey" object, created
-with \code{\link[=as_contact_survey]{as_contact_survey()}}.
+Gets a full citation from a DOI
 }
 \examples{
 \dontrun{
 # not run because it requires an internet connection
 polymod_url <- "https://doi.org/10.5281/zenodo.3874557"
-polymod <- get_survey(polymod_url)
-polymod
 citation <- get_citation(polymod)
-print(citation)
-print(citation, style = "bibtex")
 }
 }

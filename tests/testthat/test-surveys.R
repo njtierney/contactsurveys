@@ -5,7 +5,7 @@ test_that("list of surveys is not empty", {
   expect_gt(nrow(list_surveys()), 0)
 })
 
-test_that("surveys can be downloaded", {
+test_that("surveys can be downloaded with download_survey()", {
   skip_if_offline("zenodo.org")
   skip_on_cran()
 
@@ -17,6 +17,20 @@ test_that("surveys can be downloaded", {
     c("title", "bibtype", "author", "year", "note", "doi")
   )
 })
+
+test_that("surveys work with get_survey()", {
+  skip_if_offline("zenodo.org")
+  skip_on_cran()
+
+  s <- suppressMessages(suppressWarnings(get_survey("10.5281/zenodo.1095664"))) # nolint
+
+  expect_s3_class(s, "contact_survey")
+  expect_named(
+    s$reference,
+    c("title", "bibtype", "author", "year", "note", "doi")
+  )
+})
+
 
 test_that("surveys can be cited", {
   polymod_url <- "https://doi.org/10.5281/zenodo.3874557"

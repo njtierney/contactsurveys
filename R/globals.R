@@ -6,8 +6,6 @@ utils::globalVariables(c(
   "..age.unit", # <clean.contact_survey>
   "..high", # <clean.contact_survey>
   "..low", # <clean.contact_survey>
-  ":=", # <download_survey>
-  "file_name", # <download_survey>
   ":=", # <.list_surveys>
   "common_doi", # <.list_surveys>
   "doi.nb", # <.list_surveys>
