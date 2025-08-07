@@ -1,6 +1,6 @@
-library(socialmixr)
+library(socialmixr) # nolint
 library(purrr)
-library(here)
+library(here) # nolint
 
 ## load list of survey files
 survey_files <- readRDS(here("surveys", "survey_files.rds"))
