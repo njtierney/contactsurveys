@@ -54,7 +54,7 @@
                         <h4 data-toc-skip class="author">Sebastian Funk
 &amp; Nicholas Tierney</h4>
             
-            <h4 data-toc-skip class="date">2025-08-05</h4>
+            <h4 data-toc-skip class="date">2025-08-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/epiforecasts/contactsurveys/blob/main/vignettes/contactsurveys.Rmd" class="external-link"><code>vignettes/contactsurveys.Rmd</code></a></small>
       <div class="d-none name"><code>contactsurveys.Rmd</code></div>
@@ -79,7 +79,7 @@ available surveys can be listed (if an internet connection is available)
 with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/list_surveys.html">list_surveys</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>A survey can be downloaded using the <code><a href="../reference/get_survey.html">get_survey()</a></code>
+<p>A survey can be downloaded using the <code>get_survey()</code>
 command. This will get the relevant data of a survey given its Zenodo
 DOI (as returned by <code><a href="../reference/list_surveys.html">list_surveys()</a></code>). All other relevant
 commands in the <code>contactsurveys</code> package accept a DOI, but if
@@ -87,7 +87,7 @@ a survey is to be used repeatedly it is worth downloading it and storing
 it locally to avoid the need for a network connection and speed up
 processing.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">peru_survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_survey.html">get_survey</a></span><span class="op">(</span><span class="st">"https://doi.org/10.5281/zenodo.1095664"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">peru_survey</span> <span class="op">&lt;-</span> <span class="fu">get_survey</span><span class="op">(</span><span class="st">"https://doi.org/10.5281/zenodo.1095664"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">peru_survey</span>, <span class="st">"peru.rds"</span><span class="op">)</span></span></code></pre></div>
 <p>This way, the <code>peru</code> data set can be loaded in the future
 without the need for an internet connection using</p>
@@ -97,7 +97,7 @@ without the need for an internet connection using</p>
 use the <code>survey_countries</code> function</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># TODO - update this to note use polymod</span></span>
-<span><span class="fu"><a href="../reference/survey_countries.html">survey_countries</a></span><span class="op">(</span><span class="va">polymod</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">survey_countries</span><span class="op">(</span><span class="va">polymod</span><span class="op">)</span></span></code></pre></div>
 <p>If one wishes to get a contact matrix for one or more specific
 countries, a <code>countries</code> argument can be passed to
 <code>contact_matrix()</code>. If this is not done, the different
@@ -105,10 +105,10 @@ surveys contained in a dataset are combined as if they were one single
 sample (i.e., not applying any population-weighting by country or other
 correction).</p>
 <p>A reference for any given survey can be obtained using
-<code><a href="../reference/get_citation.html">get_citation()</a></code>, e.g.</p>
+<code>get_citation()</code>, e.g.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># TODO - update this to note use polymod</span></span>
-<span><span class="fu"><a href="../reference/get_citation.html">get_citation</a></span><span class="op">(</span><span class="va">polymod</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">get_citation</span><span class="op">(</span><span class="va">polymod</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
