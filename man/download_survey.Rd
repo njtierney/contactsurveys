@@ -13,7 +13,11 @@ download_survey(
 )
 }
 \arguments{
-\item{survey}{A URL (see \code{\link[=list_surveys]{list_surveys()}})}
+\item{survey}{A DOI of a survey, (see \code{\link[=list_surveys]{list_surveys()}}). If a HTML link is
+given, the DOI will be isolated and used.}
+
+\item{directory}{a directory to save the files to; if not given, will save to a
+temporary directory}
 
 \item{verbose}{Whether downloads should be echoed to output. Default TRUE.}
 
@@ -22,9 +26,6 @@ Default TRUE.}
 
 \item{timeout}{A numeric value specifying timeout in seconds. Default 60
 seconds.}
-
-\item{dir}{a directory to save the files to; if not given, will save to a
-temporary directory}
 }
 \value{
 a vector of filenames, where the surveys were downloaded

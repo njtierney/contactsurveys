@@ -2,8 +2,9 @@
 #'
 #' @description Downloads survey data
 #'
-#' @param survey A URL (see [list_surveys()])
-#' @param dir a directory to save the files to; if not given, will save to a
+#' @param survey A DOI of a survey, (see [list_surveys()]). If a HTML link is
+#'   given, the DOI will be isolated and used.
+#' @param directory a directory to save the files to; if not given, will save to a
 #'   temporary directory
 #' @param verbose Whether downloads should be echoed to output. Default TRUE.
 #' @param overwrite If files should be overwritten if they already exist.
@@ -20,6 +21,7 @@
 #' peru_survey <- download_survey("https://doi.org/10.5281/zenodo.1095664")
 #' }
 #' @seealso [list_surveys()]
+#' @importFrom zen4R get_zenodo
 #' @export
 download_survey <- function(
   survey,
@@ -48,19 +50,22 @@ download_survey <- function(
   }
 
   message("Fetching contact survey filenames from DOI ", survey_url, ".")
-  zenodo <- zen4R::ZenodoManager$new(logger = "INFO")
-  records <- zenodo$getRecordByDOI(survey_url)
+  records <- get_zenodo(survey)
 
-  message("Downloading from ", survey_url, ".")
-  records$downloadFiles(
-    path = directory,
-    quiet = verbose,
-    overwrite = overwrite,
-    timeout = timeout
-  )
-  downloaded_files <- list.files(directory)
-
-  downloaded_files
+  files_already_exist <- zenodo_files_exist(directory, records)
+  do_not_download <- files_already_exist && !overwrite
+  if (do_not_download) {
+    stop("Files already exist, use `overwrite = TRUE` to overwrite.")
+  } else {
+    message("Downloading from ", survey_url, ".")
+    records$downloadFiles(
+      path = directory,
+      quiet = verbose,
+      overwrite = overwrite,
+      timeout = timeout
+    )
+    return(zenodo_files(directory, records))
+  }
 }
 
 ##' Checks if a character string is a DOI
