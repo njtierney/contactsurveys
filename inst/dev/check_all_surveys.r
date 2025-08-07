@@ -1,4 +1,4 @@
-library(contactsurveys)
+library(socialmixr)
 library(purrr)
 library(here)
 

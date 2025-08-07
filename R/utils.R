@@ -11,18 +11,21 @@
 zenodo_files_exist <- function(directory, records) {
   the_zenodo_files <- zenodo_files(directory, records)
   if (is.character(the_zenodo_files)) {
-    return(TRUE)
+    files_exist <- TRUE
   } else if (is.null(the_zenodo_files)) {
-    return(FALSE)
+    files_exist <- FALSE
   }
+
+  files_exist
 }
 
 zenodo_files <- function(directory, records) {
   zenodo_files <- file.path(directory, names(records$files))
   do_all_files_exist <- all(file.exists(zenodo_files))
   if (do_all_files_exist) {
-    return(zenodo_files)
+    out <- zenodo_files
   } else {
-    return(NULL)
+    out <- NULL
   }
+  out
 }
