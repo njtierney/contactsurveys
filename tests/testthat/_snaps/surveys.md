@@ -26,6 +26,6 @@
       v Successfully fetched list of published records!
       v Successfully fetched published record for concept DOI '10.5281/zenodo.1095664'!
     Condition
-      Error in `download_survey()`:
+      Error:
       ! Files already exist, use `overwrite = TRUE` to overwrite.
 
