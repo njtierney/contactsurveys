@@ -17,8 +17,8 @@
 #' list_surveys()
 #' peru_survey <- download_survey("https://doi.org/10.5281/zenodo.1095664")
 #' }
-#' @return a vector of filenames that can be used with [load_survey()]
-#' @seealso [load_survey()]
+#' @return a vector of filenames, where the surveys were downloaded
+#' @seealso [list_surveys()]
 #' @export
 download_survey <- function(survey, dir = NULL, sleep = 1) {
   if (!is.character(survey) || length(survey) > 1) {

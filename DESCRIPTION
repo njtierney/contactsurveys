@@ -19,16 +19,12 @@ License: MIT + file LICENSE
 Depends: 
     R (>= 4.1.0)
 Imports:
-    checkmate,
-    countrycode,
     curl,
     data.table,
     httr,
     jsonlite,
-    lubridate,
     memoise,
     oai,
-    purrr,
     xml2
 Suggests:
     knitr,

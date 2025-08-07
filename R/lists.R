@@ -1,7 +1,10 @@
 #' List all surveys available for download
 #'
 #' @return character vector of surveys
-#' @inheritParams get_survey
+#' @param clear_cache logical, whether to clear the cache before downloading
+#'   the survey; by default, the cache is not cleared and so multiple calls of
+#'   this function to access the same survey will not result in repeated
+#'   downloads.
 #' @importFrom memoise memoise
 #' @examples
 #' \dontrun{
@@ -60,24 +63,4 @@ list_surveys <- function(clear_cache = FALSE) {
     creator,
     url = identifier.2
   )]
-}
-
-#' List all countries contained in a survey
-#'
-#' @param country.column column in the survey indicating the country
-#' @param ... further arguments for [get_survey()]
-#' @return list of countries
-#' @inheritParams get_survey
-#' @examples
-#' \dontrun{
-#' # not run because it requires an internet connection
-#' polymod_url <- "https://doi.org/10.5281/zenodo.3874557"
-#' polymod <- get_survey(polymod_url)
-#' polymod
-#' survey_countries(polymod)
-#' }
-#' @export
-survey_countries <- function(survey, country.column = "country", ...) {
-  survey <- get_survey(survey, ...)
-  return(as.character(unique(survey[["participants"]][[country.column]])))
 }
