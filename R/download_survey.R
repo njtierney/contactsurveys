@@ -55,7 +55,10 @@ download_survey <- function(
   files_already_exist <- zenodo_files_exist(directory, records)
   do_not_download <- files_already_exist && !overwrite
   if (do_not_download) {
-    stop("Files already exist, use `overwrite = TRUE` to overwrite.", call. = FALSE)
+    stop(
+      "Files already exist, use `overwrite = TRUE` to overwrite.",
+      call. = FALSE
+    )
   } else {
     message("Downloading from ", survey_url, ".")
     records$downloadFiles(
