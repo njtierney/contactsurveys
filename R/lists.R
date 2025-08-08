@@ -1,31 +1,22 @@
 #' List all surveys available for download
 #'
 #' @return character vector of surveys
-#' @param clear_cache logical, whether to clear the cache before downloading
-#'   the survey; by default, the cache is not cleared and so multiple calls of
-#'   this function to access the same survey will not result in repeated
-#'   downloads.
-#' @importFrom memoise memoise
+#' @inheritParams download_survey
+#' @importFrom oai list_records
+#' @importFrom data.table data.table setkey rbindlist
+#' @autoglobal
 #' @examples
 #' \dontrun{
 #' list_surveys()
 #' }
 #' @export
-list_surveys <- function(clear_cache = FALSE) {
-  if (
-    !("list_surveys" %in% names(contactsurveys$cached_functions)) ||
-      clear_cache
-  ) {
-    contactsurveys$cached_functions$list_surveys <- memoise(.list_surveys)
+list_surveys <- function(directory = contactsurveys_dir(), overwrite = FALSE) {
+  survey_list_path <- file.path(directory, "survey_list.rds")
+  survey_list_exists <- file.exists(survey_list_path)
+  if (survey_list_exists && !overwrite) {
+    record_list <- readRDS(survey_list_path)
+    return(record_list)
   }
-  contactsurveys$cached_functions$list_surveys()
-}
-
-#' @autoglobal
-#' @importFrom oai list_records
-#' @importFrom data.table data.table setkey rbindlist
-#' @keywords internal
-.list_surveys <- function() {
   record_list <-
     data.table(list_records(
       url = "https://zenodo.org/oai2d",
@@ -57,10 +48,15 @@ list_surveys <- function(clear_cache = FALSE) {
   record_list <- record_list[, .SD[1], by = common_doi]
   ## order by date
   setkey(record_list, date)
-  record_list[, list(
+  record_list <- record_list[, list(
     date_added = date,
     title,
     creator,
     url = identifier.2
   )]
+
+  ensure_dir_exists(directory)
+  saveRDS(object = record_list, file = survey_list_path)
+
+  record_list
 }

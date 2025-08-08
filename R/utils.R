@@ -28,3 +28,14 @@ zenodo_files <- function(directory, records) {
   }
   out
 }
+
+
+ensure_dir_exists <- function(directory) {
+  if (!dir.exists(directory)) {
+    dir.create(
+      path = directory,
+      showWarnings = FALSE,
+      recursive = TRUE
+    )
+  }
+}

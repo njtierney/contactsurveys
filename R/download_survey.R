@@ -1,13 +1,18 @@
 #' Download a survey from its Zenodo repository
 #'
-#' @description Downloads survey data
+#' @description Downloads survey data. Uses a caching mechanism via the default
+#'   argument for `directory`.
 #'
 #' @param survey A DOI of a survey, (see [list_surveys()]). If a HTML link is
 #'   given, the DOI will be isolated and used.
 #' @param directory Directory of where to save survey files. The default value
-#'   is to use the directory for your system, based on [tools::R_user_dir()].
-#'   You can specify your own directory, or set an environment variable,
-#'   `CONTACTSURVEYS_HOME`, see [Sys.setenv()] or [Renviron].
+#'  is to use the directory for your system using [contactsurveys_dir()], which
+#'  uses [tools::R_user_dir()]. This effectively caches the data. You can
+#'  specify your own directory, or set an environment variable,
+#'  `CONTACTSURVEYS_HOME`, see [Sys.setenv()] or [Renviron] for more detail.
+#'  If this argument is set to something other than [contactsurveys_dir()] it
+#'  will give a warning, as we the user to avoid downloading data if they do
+#'  not need to.
 #' @param verbose Whether downloads should be echoed to output. Default TRUE.
 #' @param overwrite If files should be overwritten if they already exist.
 #'   Default TRUE.
@@ -50,8 +55,8 @@ download_survey <- function(
   if (!is_contactsurveys_dir) {
     warning(
       "Directory is different to `contactsurveys_dir()`",
-      "This means the files will likely not be permanent between R \\
-              sessions. See `?contactsurveys_dir()` for more details.",
+      "This means the files will not be permanent between R sessions.",
+      "See `?contactsurveys_dir()` for more details.",
       call. = FALSE
     )
   }
@@ -62,13 +67,7 @@ download_survey <- function(
     survey_url <- survey
   }
 
-  if (!dir.exists(directory)) {
-    dir.create(
-      path = directory,
-      showWarnings = FALSE,
-      recursive = TRUE
-    )
-  }
+  ensure_dir_exists(directory)
 
   message("Fetching contact survey filenames from DOI ", survey_url, ".")
   records <- get_zenodo(survey)

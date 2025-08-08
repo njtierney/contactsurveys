@@ -20,7 +20,6 @@ Depends:
     R (>= 4.1.0)
 Imports:
     data.table,
-    memoise,
     oai,
     zen4R (>= 0.10.2)
 Suggests:

@@ -17,9 +17,13 @@ download_survey(
 given, the DOI will be isolated and used.}
 
 \item{directory}{Directory of where to save survey files. The default value
-is to use the directory for your system, based on \code{\link[tools:userdir]{tools::R_user_dir()}}.
-You can specify your own directory, or set an environment variable,
-\code{CONTACTSURVEYS_HOME}, see \code{\link[=Sys.setenv]{Sys.setenv()}} or \link{Renviron}.}
+is to use the directory for your system using \code{\link[=contactsurveys_dir]{contactsurveys_dir()}}, which
+uses \code{\link[tools:userdir]{tools::R_user_dir()}}. This effectively caches the data. You can
+specify your own directory, or set an environment variable,
+\code{CONTACTSURVEYS_HOME}, see \code{\link[=Sys.setenv]{Sys.setenv()}} or \link{Renviron} for more detail.
+If this argument is set to something other than \code{\link[=contactsurveys_dir]{contactsurveys_dir()}} it
+will give a warning, as we the user to avoid downloading data if they do
+not need to.}
 
 \item{verbose}{Whether downloads should be echoed to output. Default TRUE.}
 
@@ -33,7 +37,8 @@ seconds.}
 a vector of filenames, where the surveys were downloaded
 }
 \description{
-Downloads survey data
+Downloads survey data. Uses a caching mechanism via the default
+argument for \code{directory}.
 }
 \examples{
 \donttest{
