@@ -11,8 +11,9 @@ Provides methods for downloading contact surveys that are then used in infectiou
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/njtierney/contactsurveys}
-  \item Report bugs at \url{https://github.com/njtierney/contactsurveys/issues}
+  \item \url{https://github.com/epiforecasts/contactsurveys}
+  \item \url{http://epiforecasts.io/contactsurveys/}
+  \item Report bugs at \url{https://github.com/epiforecasts/contactsurveys/issues}
 }
 
 }
