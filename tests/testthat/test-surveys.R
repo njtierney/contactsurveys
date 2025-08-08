@@ -18,8 +18,7 @@ test_that("surveys can be downloaded with download_survey()", {
   expect_snapshot(basename(peru_survey_files))
   # expect message from downloading again
   expect_snapshot(
-    error = TRUE,
-    download_survey(doi_peru, overwrite = FALSE)
+    . <- download_survey(doi_peru, overwrite = FALSE) # nolint
   )
 })
 

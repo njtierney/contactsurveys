@@ -14,7 +14,7 @@
 ---
 
     Code
-      download_survey(doi_peru, overwrite = FALSE)
+      . <- download_survey(doi_peru, overwrite = FALSE)
     Message
       Fetching contact survey filenames from DOI https://doi.org/10.5281/zenodo.1095664.
       v Successfully fetched list of published records!
@@ -25,7 +25,5 @@
       i Successfully fetched list of published records - page 1
       v Successfully fetched list of published records!
       v Successfully fetched published record for concept DOI '10.5281/zenodo.1095664'!
-    Condition
-      Error:
-      ! Files already exist, use `overwrite = TRUE` to overwrite.
+      Files already exist, and `overwrite = TRUE`, so skipping download. If you want to download the files, set `overwrite = TRUE`FALSE
 
