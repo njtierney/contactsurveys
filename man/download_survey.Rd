@@ -4,12 +4,11 @@
 \alias{download_survey}
 \title{Download a survey from its Zenodo repository}
 \usage{
-download_survey(survey, dir = NULL, sleep = 1, overwrite = FALSE)
 download_survey(
   survey,
-  directory = tempdir(),
+  directory = contactsurveys_dir(),
   verbose = TRUE,
-  overwrite = TRUE,
+  overwrite = FALSE,
   timeout = 60
 )
 }
@@ -17,8 +16,10 @@ download_survey(
 \item{survey}{A DOI of a survey, (see \code{\link[=list_surveys]{list_surveys()}}). If a HTML link is
 given, the DOI will be isolated and used.}
 
-\item{directory}{a directory to save the files to; if not given, will save to a
-temporary directory}
+\item{directory}{Directory of where to save survey files. The default value
+is to use the directory for your system, based on \code{\link[tools:userdir]{tools::R_user_dir()}}.
+You can specify your own directory, or set an environment variable,
+\code{CONTACTSURVEYS_HOME}, see \code{\link[=Sys.setenv]{Sys.setenv()}} or \link{Renviron}.}
 
 \item{verbose}{Whether downloads should be echoed to output. Default TRUE.}
 
@@ -35,7 +36,7 @@ a vector of filenames, where the surveys were downloaded
 Downloads survey data
 }
 \examples{
-\dontrun{
+\donttest{
 list_surveys()
 peru_survey <- download_survey("https://doi.org/10.5281/zenodo.1095664")
 }

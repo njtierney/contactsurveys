@@ -4,8 +4,10 @@
 #'
 #' @param survey A DOI of a survey, (see [list_surveys()]). If a HTML link is
 #'   given, the DOI will be isolated and used.
-#' @param directory a directory to save the files to; if not given, will save to a
-#'   temporary directory
+#' @param directory Directory of where to save survey files. The default value
+#'   is to use the directory for your system, based on [tools::R_user_dir()].
+#'   You can specify your own directory, or set an environment variable,
+#'   `CONTACTSURVEYS_HOME`, see [Sys.setenv()] or [Renviron].
 #' @param verbose Whether downloads should be echoed to output. Default TRUE.
 #' @param overwrite If files should be overwritten if they already exist.
 #'   Default TRUE.
@@ -16,7 +18,7 @@
 #'
 #' @autoglobal
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' list_surveys()
 #' peru_survey <- download_survey("https://doi.org/10.5281/zenodo.1095664")
 #' }
@@ -25,9 +27,9 @@
 #' @export
 download_survey <- function(
   survey,
-  directory = get_pkg_user_dir(),
+  directory = contactsurveys_dir(),
   verbose = TRUE,
-  overwrite = TRUE,
+  overwrite = FALSE,
   timeout = 60
 ) {
   if (!is.character(survey) || length(survey) > 1) {
@@ -49,16 +51,26 @@ download_survey <- function(
     survey_url <- survey
   }
 
+  if (!dir.exists(directory)) {
+    dir.create(
+      path = directory,
+      showWarnings = FALSE,
+      recursive = TRUE
+    )
+  }
+
   message("Fetching contact survey filenames from DOI ", survey_url, ".")
   records <- get_zenodo(survey)
 
   files_already_exist <- zenodo_files_exist(directory, records)
   do_not_download <- files_already_exist && !overwrite
   if (do_not_download) {
-    stop(
-      "Files already exist, use `overwrite = TRUE` to overwrite.",
+    message(
+      "Files already exist, and `overwrite = TRUE`, so skipping download. ",
+      "If you want to download the files, set `overwrite = TRUE`",
       call. = FALSE
     )
+    return(NULL)
   } else {
     message("Downloading from ", survey_url, ".")
     records$downloadFiles(
