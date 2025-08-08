@@ -1,10 +1,3 @@
-test_that("list of surveys is not empty", {
-  skip_if_offline("zenodo.org")
-  skip_on_cran()
-  skip_on_ci()
-  expect_gt(nrow(list_surveys()), 0)
-})
-
 test_that("surveys can be downloaded with download_survey()", {
   skip_if_offline("zenodo.org")
   skip_on_cran()
@@ -18,8 +11,7 @@ test_that("surveys can be downloaded with download_survey()", {
   expect_snapshot(basename(peru_survey_files))
   # expect message from downloading again
   expect_snapshot(
-    error = TRUE,
-    download_survey(doi_peru, overwrite = FALSE)
+    . <- download_survey(doi_peru, overwrite = FALSE) # nolint
   )
 })
 

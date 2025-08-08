@@ -1,4 +1,3 @@
-#' Check if Zenodo files exist
 #'
 #' For use inside [download_survey()].
 #'
@@ -28,4 +27,15 @@ zenodo_files <- function(directory, records) {
     out <- NULL
   }
   out
+}
+
+
+ensure_dir_exists <- function(directory) {
+  if (!dir.exists(directory)) {
+    dir.create(
+      path = directory,
+      showWarnings = FALSE,
+      recursive = TRUE
+    )
+  }
 }
