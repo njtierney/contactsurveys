@@ -45,6 +45,17 @@ download_survey <- function(
     stop("'survey' is not a DOI or URL.", call. = FALSE)
   }
 
+  is_contactsurveys_dir <- all.equal(directory, contactsurveys_dir())
+
+  if (!is_contactsurveys_dir) {
+    warning(
+      "Directory is different to `contactsurveys_dir()`",
+      "This means the files will likely not be permanent between R \\
+              sessions. See `?contactsurveys_dir()` for more details.",
+      call. = FALSE
+    )
+  }
+
   if (is.doi) {
     survey_url <- paste0("https://doi.org/", survey)
   } else {
