@@ -19,13 +19,10 @@ License: MIT + file LICENSE
 Depends: 
     R (>= 4.1.0)
 Imports:
-    curl,
     data.table,
-    httr,
-    jsonlite,
     memoise,
     oai,
-    xml2
+    zen4R (>= 0.10.2)
 Suggests:
     knitr,
     rmarkdown,

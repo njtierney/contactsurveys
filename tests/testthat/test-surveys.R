@@ -5,7 +5,7 @@ test_that("list of surveys is not empty", {
   expect_gt(nrow(list_surveys()), 0)
 })
 
-test_that("surveys can be downloaded", {
+test_that("surveys can be downloaded with download_survey()", {
   skip_if_offline("zenodo.org")
   skip_on_cran()
 
@@ -14,7 +14,13 @@ test_that("surveys can be downloaded", {
 
   expect_true(all(file.exists(peru_survey_files)))
   # expect contains peru
-  expect_true(all(grepl("peru", basename(peru_survey_files), fixed = TRUE)))
+  expect_true(all(grepl("Peru", basename(peru_survey_files), fixed = TRUE)))
+  expect_snapshot(basename(peru_survey_files))
+  # expect message from downloading again
+  expect_snapshot(
+    error = TRUE,
+    download_survey(doi_peru, overwrite = FALSE)
+  )
 })
 
 test_that("multiple DOI's cannot be loaded", {

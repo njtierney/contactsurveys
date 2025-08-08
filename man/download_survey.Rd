@@ -4,16 +4,28 @@
 \alias{download_survey}
 \title{Download a survey from its Zenodo repository}
 \usage{
-download_survey(survey, dir = NULL, sleep = 1)
+download_survey(
+  survey,
+  directory = tempdir(),
+  verbose = TRUE,
+  overwrite = TRUE,
+  timeout = 60
+)
 }
 \arguments{
-\item{survey}{a URL (see \code{\link[=list_surveys]{list_surveys()}})}
+\item{survey}{A DOI of a survey, (see \code{\link[=list_surveys]{list_surveys()}}). If a HTML link is
+given, the DOI will be isolated and used.}
 
-\item{dir}{a directory to save the files to; if not given, will save to a
+\item{directory}{a directory to save the files to; if not given, will save to a
 temporary directory}
 
-\item{sleep}{time to sleep between requests to avoid overloading the server
-(passed on to \code{\link[base]{Sys.sleep}})}
+\item{verbose}{Whether downloads should be echoed to output. Default TRUE.}
+
+\item{overwrite}{If files should be overwritten if they already exist.
+Default TRUE.}
+
+\item{timeout}{A numeric value specifying timeout in seconds. Default 60
+seconds.}
 }
 \value{
 a vector of filenames, where the surveys were downloaded
