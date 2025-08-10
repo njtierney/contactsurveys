@@ -28,7 +28,7 @@ not need to.}
 \item{verbose}{Whether downloads should be echoed to output. Default TRUE.}
 
 \item{overwrite}{If files should be overwritten if they already exist.
-Default TRUE.}
+Default FALSE}
 
 \item{timeout}{A numeric value specifying timeout in seconds. Default 60
 seconds.}

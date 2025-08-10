@@ -17,7 +17,7 @@ will give a warning, as we the user to avoid downloading data if they do
 not need to.}
 
 \item{overwrite}{If files should be overwritten if they already exist.
-Default TRUE.}
+Default FALSE}
 }
 \value{
 character vector of surveys
