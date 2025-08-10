@@ -15,7 +15,7 @@
 #'  not need to.
 #' @param verbose Whether downloads should be echoed to output. Default TRUE.
 #' @param overwrite If files should be overwritten if they already exist.
-#'   Default TRUE.
+#'   Default FALSE
 #' @param timeout A numeric value specifying timeout in seconds. Default 60
 #'  seconds.
 #'
@@ -50,12 +50,12 @@ download_survey <- function(
     stop("'survey' is not a DOI or URL.", call. = FALSE)
   }
 
-  is_contactsurveys_dir <- all.equal(directory, contactsurveys_dir())
+  is_contactsurveys_dir <- identical(directory, contactsurveys_dir())
 
   if (!is_contactsurveys_dir) {
     warning(
-      "Directory is different to `contactsurveys_dir()`",
-      "This means the files will not be permanent between R sessions.",
+      "Directory differs from `contactsurveys_dir()`; \\
+      files may persist between R sessions. ",
       "See `?contactsurveys_dir()` for more details.",
       call. = FALSE
     )
@@ -76,9 +76,8 @@ download_survey <- function(
   do_not_download <- files_already_exist && !overwrite
   if (do_not_download) {
     message(
-      "Files already exist, and `overwrite = TRUE`, so skipping download. ",
-      "If you want to download the files, set `overwrite = TRUE`",
-      call. = FALSE
+      "Files already exist, and `overwrite = FALSE`; skipping download. ",
+      "Set `overwrite = TRUE` to force a re-download."
     )
     return(NULL)
   } else {

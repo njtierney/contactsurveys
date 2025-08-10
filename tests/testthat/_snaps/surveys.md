@@ -25,5 +25,5 @@
       i Successfully fetched list of published records - page 1
       v Successfully fetched list of published records!
       v Successfully fetched published record for concept DOI '10.5281/zenodo.1095664'!
-      Files already exist, and `overwrite = TRUE`, so skipping download. If you want to download the files, set `overwrite = TRUE`FALSE
+      Files already exist, and `overwrite = FALSE`; skipping download. Set `overwrite = TRUE` to force a re-download.
 
