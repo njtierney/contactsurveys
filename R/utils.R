@@ -30,6 +30,7 @@ zenodo_files <- function(directory, records) {
 }
 
 
+#' @note internal
 ensure_dir_exists <- function(directory) {
   if (!dir.exists(directory)) {
     dir.create(
