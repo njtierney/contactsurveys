@@ -32,11 +32,22 @@ zenodo_files <- function(directory, records) {
 
 #' @note internal
 ensure_dir_exists <- function(directory) {
+  stopifnot(
+    is.character(directory),
+    length(directory) == 1L,
+    !is.na(directory),
+    nzchar(directory)
+  )
+  directory <- path.expand(directory)
   if (!dir.exists(directory)) {
-    dir.create(
+    ok <- dir.create(
       path = directory,
       showWarnings = FALSE,
       recursive = TRUE
     )
+    if (!ok && !dir.exists(directory)) {
+      stop("Failed to create directory: ", directory, call. = FALSE)
+    }
   }
+  invisible(directory)
 }
