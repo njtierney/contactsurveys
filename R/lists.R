@@ -18,9 +18,9 @@ list_surveys <- function(
   if (verbose) {
     .list_surveys(directory = directory, overwrite = overwrite)
   } else {
-    suppressWarnings(suppressMessages(
+    suppressMessages(
       .list_surveys(directory = directory, overwrite = overwrite)
-    ))
+    )
   }
 }
 
