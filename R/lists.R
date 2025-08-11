@@ -13,7 +13,12 @@
 list_surveys <- function(directory = contactsurveys_dir(), overwrite = FALSE) {
   survey_list_path <- file.path(directory, "survey_list.rds")
   survey_list_exists <- file.exists(survey_list_path)
-  if (survey_list_exists && !overwrite) {
+  do_not_download <- survey_list_exists && !overwrite
+  if (do_not_download) {
+    message(
+      "Files already exist, and `overwrite = FALSE`; skipping download. ",
+      "Set `overwrite = TRUE` to force a re-download."
+    )
     record_list <- readRDS(survey_list_path)
     return(record_list)
   }
