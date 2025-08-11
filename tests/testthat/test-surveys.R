@@ -13,6 +13,10 @@ test_that("surveys can be downloaded with download_survey()", {
   expect_snapshot(
     . <- download_survey(doi_peru, overwrite = FALSE) # nolint
   )
+
+  # expect files are the same
+  peru_2 <- suppressMessages(download_survey(doi_peru, overwrite = FALSE))
+  expect_identical(basename(peru_2), basename(peru_survey_files))
 })
 
 test_that("multiple DOI's cannot be loaded", {
