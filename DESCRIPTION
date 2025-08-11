@@ -19,6 +19,7 @@ License: MIT + file LICENSE
 Depends: 
     R (>= 4.1.0)
 Imports:
+    cli,
     data.table,
     oai,
     zen4R (>= 0.10.2)

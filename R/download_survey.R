@@ -38,7 +38,7 @@ download_survey <- function(
   timeout = 60
 ) {
   if (!is.character(survey) || length(survey) > 1) {
-    stop("'survey' must be a character of length 1", call. = FALSE)
+    cli::cli_abort("{.arg survey} must be a character of length 1.")
   }
 
   survey <- sub("^(https?:\\/\\/(dx\\.)?doi\\.org\\/|doi:)", "", survey)
@@ -47,17 +47,23 @@ download_survey <- function(
   is.url <- is.doi || grepl("^https?:\\/\\/", survey)
 
   if (!is.url) {
-    stop("'survey' is not a DOI or URL.", call. = FALSE)
+    cli::cli_abort(
+      c(
+        "'survey' must be a DOI or URL.",
+        "We see: {.val survey}"
+      )
+    )
   }
 
   is_contactsurveys_dir <- identical(directory, contactsurveys_dir())
 
   if (!is_contactsurveys_dir) {
-    warning(
-      "Directory differs from `contactsurveys_dir()`; \\
-      files may persist between R sessions. ",
-      "See `?contactsurveys_dir()` for more details.",
-      call. = FALSE
+    cli::cli_warn(
+      c(
+        "Directory differs from {.fn contactsurveys_dir}",
+        "!" = "files may persist between R sessions.",
+        "i" = "See {.fn contactsurveys_dir} for more details."
+      )
     )
   }
 
@@ -69,19 +75,21 @@ download_survey <- function(
 
   ensure_dir_exists(directory)
 
-  message("Fetching contact survey filenames from DOI ", survey_url, ".")
+  cli::cli_inform("Fetching contact survey filenames from DOI {survey_url}.")
   records <- get_zenodo(survey)
 
   files_already_exist <- zenodo_files_exist(directory, records)
   do_not_download <- files_already_exist && !overwrite
   if (do_not_download) {
-    message(
-      "Files already exist, and `overwrite = FALSE`; skipping download. ",
-      "Set `overwrite = TRUE` to force a re-download."
+    cli::cli_inform(
+      c(
+        "Files already exist, and {.code overwrite = FALSE}; skipping download.",
+        "i" = "Set {.code overwrite = TRUE} to force a re-download."
+      )
     )
     return(zenodo_files(directory, records))
   } else {
-    message("Downloading from ", survey_url, ".")
+    cli::cli_inform("Downloading from {survey_url}.")
     records$downloadFiles(
       path = directory,
       quiet = !verbose,

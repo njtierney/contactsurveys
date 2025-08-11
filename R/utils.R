@@ -46,7 +46,7 @@ ensure_dir_exists <- function(directory) {
       recursive = TRUE
     )
     if (!ok && !dir.exists(directory)) {
-      stop("Failed to create directory: ", directory, call. = FALSE)
+      cli::cli_abort("Failed to create directory {.file {directory}}.")
     }
   }
   invisible(directory)

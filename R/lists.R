@@ -14,11 +14,12 @@ list_surveys <- function(directory = contactsurveys_dir(), overwrite = FALSE) {
   is_contactsurveys_dir <- identical(directory, contactsurveys_dir())
 
   if (!is_contactsurveys_dir) {
-    warning(
-      "Directory differs from `contactsurveys_dir()`; \\
-      files may persist between R sessions. ",
-      "See `?contactsurveys_dir()` for more details.",
-      call. = FALSE
+    cli::cli_warn(
+      c(
+        "Directory differs from {.fn contactsurveys_dir}",
+        "!" = "files may persist between R sessions.",
+        "i" = "See {.fn contactsurveys_dir} for more details."
+      )
     )
   }
 
@@ -26,17 +27,18 @@ list_surveys <- function(directory = contactsurveys_dir(), overwrite = FALSE) {
   survey_list_exists <- file.exists(survey_list_path)
   do_not_download <- survey_list_exists && !overwrite
   if (do_not_download) {
-    message(
-      "Files already exist at: ",
-      survey_list_path,
-      "; and `overwrite = FALSE`; skipping download. ",
-      "Set `overwrite = TRUE` to force a re-download."
+    cli::cli_inform(
+      c(
+        "Files already exist at {.path {survey_list_path}} and
+     {.code overwrite = FALSE}; skipping download.",
+        "i" = "Set {.code overwrite = TRUE} to force a re-download."
+      )
     )
     record_list <- tryCatch(readRDS(survey_list_path), error = function(e) NULL)
     if (!is.null(record_list)) {
       return(record_list)
     }
-    message("Cached survey_list.rds could not be read; re-downloading.")
+    cli::cli_inform("Cached survey_list.rds could not be read; re-downloading.")
     unlink(survey_list_path, force = TRUE)
   }
   record_list <-

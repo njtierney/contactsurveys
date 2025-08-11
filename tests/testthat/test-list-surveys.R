@@ -19,6 +19,6 @@ test_that("list_surveys() caches to disk and returns non-empty result", {
   # verify message when overwrite = FALSE
   expect_message(
     object = list_surveys(),
-    regexp = "Files already exist at:"
+    regexp = "Files already exist at"
   )
 })
