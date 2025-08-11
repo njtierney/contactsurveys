@@ -15,10 +15,11 @@ test_that("list of surveys is not empty", {
   expect_true(file.exists(survey_path))
 
   # verify time taken is shorter on a second run
-  ls_time1 <- system.time(list_surveys(overwrite = TRUE))
-  ls_time2 <- system.time(list_surveys())
-  expect_lt(ls_time2["elapsed"], ls_time1["elapsed"])
-
+  list_surveys(overwrite = TRUE)
+  mtime_before <- file.info(survey_path)$mtime
+  . <- list_surveys() # nolint
+  mtime_after <- file.info(survey_path)$mtime
+  expect_equal(mtime_after, mtime_before)
   # verify message when overwrite = FALSE
   expect_snapshot(
     . <- list_surveys() # nolint
