@@ -29,3 +29,8 @@
       i Files already exist, and `overwrite = FALSE`
       i Set `overwrite = TRUE` to force a re-download.
 
+# download_survey() is silent when verbose = FALSE
+
+    Code
+      . <- download_survey(doi_peru, verbose = FALSE)
+

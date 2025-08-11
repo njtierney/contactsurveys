@@ -22,3 +22,12 @@ test_that("list_surveys() caches to disk and returns non-empty result", {
     regexp = "Files already exist at"
   )
 })
+
+test_that("list_surveys() is silent when verbose = FALSE", {
+  skip_if_offline("zenodo.org")
+  skip_on_cran()
+  skip_on_ci()
+  expect_snapshot(
+    . <- list_surveys(verbose = FALSE) # nolint
+  )
+})
