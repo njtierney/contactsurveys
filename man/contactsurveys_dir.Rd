@@ -16,8 +16,8 @@ that are downloaded. The \code{\link[=download_survey]{download_survey()}} funct
 operating system, powered by the base function, \code{\link[tools:userdir]{tools::R_user_dir()}}. You
 can override this by setting an environment variable, \code{CONTACTSURVEYS_HOME}.
 The functions \code{\link[=list_surveys]{list_surveys()}} and \code{\link[=download_survey]{download_survey()}} will use this default
-directory. You can also specify the \code{dir} argument in these functions in
-place of the default value, \code{contactsurveys_dir()}. This approach has been
+directory. You can also specify the \code{directory} argument in these functions
+in place of the default value, \code{contactsurveys_dir()}. This approach has been
 borrowed from Carl Boettiger's \code{neonstore} R package.
 }
 \examples{

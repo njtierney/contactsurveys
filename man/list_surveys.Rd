@@ -20,7 +20,7 @@ cache.}
 Default FALSE}
 }
 \value{
-character vector of surveys
+data.table with columns: date_added, title, creator, url
 }
 \description{
 List all surveys available for download

@@ -1,6 +1,6 @@
 #' List all surveys available for download
 #'
-#' @return character vector of surveys
+#' @return data.table with columns: date_added, title, creator, url
 #' @inheritParams download_survey
 #' @importFrom oai list_records
 #' @importFrom data.table data.table setkey rbindlist
