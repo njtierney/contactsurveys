@@ -4,7 +4,11 @@
 \alias{list_surveys}
 \title{List all surveys available for download}
 \usage{
-list_surveys(directory = contactsurveys_dir(), overwrite = FALSE)
+list_surveys(
+  directory = contactsurveys_dir(),
+  overwrite = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{directory}{Directory of where to save survey files. The default value
@@ -18,6 +22,8 @@ cache.}
 
 \item{overwrite}{If files should be overwritten if they already exist.
 Default FALSE}
+
+\item{verbose}{Whether downloads should be echoed to output. Default TRUE.}
 }
 \value{
 data.table with columns: date_added, title, creator, url
