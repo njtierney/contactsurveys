@@ -46,14 +46,14 @@ download_survey <- function(
   check_directory(directory)
 
   if (is_doi(survey)) {
-    survey_url <- paste0("https://doi.org/", survey)
+    survey_url <- paste0("https://doi.org/", survey) # nolint
   } else {
-    survey_url <- survey
+    survey_url <- survey # nolint
   }
 
   ensure_dir_exists(directory)
 
-  cli::cli_inform("Fetching contact survey filenames from DOI {survey_url}.")
+  cli::cli_inform("Fetching contact survey filenames from: {survey_url}.")
   records <- get_zenodo(survey)
 
   files_already_exist <- zenodo_files_exist(directory, records)
@@ -61,8 +61,9 @@ download_survey <- function(
   if (do_not_download) {
     cli::cli_inform(
       c(
-        "Files already exist, and {.code overwrite = FALSE}; skipping download.",
-        "i" = "Set {.code overwrite = TRUE} to force a re-download."
+        "Skipping download.",
+        "i" = "Files already exist, and {.code overwrite = FALSE}", # nolint
+        "i" = "Set {.code overwrite = TRUE} to force a re-download." # nolint
       )
     )
     return(zenodo_files(directory, records))

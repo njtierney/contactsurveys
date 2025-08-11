@@ -32,12 +32,17 @@ zenodo_files <- function(directory, records) {
 
 #' @note internal
 ensure_dir_exists <- function(directory) {
-  stopifnot(
-    is.character(directory),
-    length(directory) == 1L,
-    !is.na(directory),
-    nzchar(directory)
-  )
+  if (
+    !is.character(directory) ||
+      length(directory) != 1L ||
+      is.na(directory) ||
+      !nzchar(directory)
+  ) {
+    cli::cli_abort(
+      "{.arg directory} must be a valid file path.",
+      call = rlang::caller_env()
+    )
+  }
   directory <- path.expand(directory)
   if (!dir.exists(directory)) {
     ok <- dir.create(
@@ -46,7 +51,10 @@ ensure_dir_exists <- function(directory) {
       recursive = TRUE
     )
     if (!ok && !dir.exists(directory)) {
-      cli::cli_abort("Failed to create directory {.file {directory}}.")
+      cli::cli_abort(
+        "Failed to create directory {.file {directory}}.",
+        call = rlang::caller_env()
+      )
     }
   }
   invisible(directory)

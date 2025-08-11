@@ -19,10 +19,10 @@ License: MIT + file LICENSE
 Depends: 
     R (>= 4.1.0)
 Imports:
-    cli,
+    cli (>= 3.6.0),
     data.table,
     oai,
-    rlang,
+    rlang (>= 1.0.0),
     zen4R (>= 0.10.2)
 Suggests:
     knitr,

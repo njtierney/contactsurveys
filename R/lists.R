@@ -17,8 +17,8 @@ list_surveys <- function(directory = contactsurveys_dir(), overwrite = FALSE) {
     cli::cli_warn(
       c(
         "Directory differs from {.fn contactsurveys_dir}",
-        "!" = "files may persist between R sessions.",
-        "i" = "See {.fn contactsurveys_dir} for more details."
+        "!" = "Files may persist between R sessions.",
+        "i" = "See {.fn contactsurveys_dir} for more details." # nolint
       )
     )
   }
@@ -29,9 +29,12 @@ list_surveys <- function(directory = contactsurveys_dir(), overwrite = FALSE) {
   if (do_not_download) {
     cli::cli_inform(
       c(
-        "Files already exist at {.path {survey_list_path}} and
-     {.code overwrite = FALSE}; skipping download.",
+        "Skipping download",
+        # nolint start
+        "i" = "Files already exist at {.path {survey_list_path}} and \\
+        {.code overwrite = FALSE}",
         "i" = "Set {.code overwrite = TRUE} to force a re-download."
+        # nolint end
       )
     )
     record_list <- tryCatch(readRDS(survey_list_path), error = function(e) NULL)
