@@ -10,7 +10,26 @@
 #' list_surveys()
 #' }
 #' @export
-list_surveys <- function(directory = contactsurveys_dir(), overwrite = FALSE) {
+list_surveys <- function(
+  directory = contactsurveys_dir(),
+  overwrite = FALSE,
+  verbose = TRUE
+) {
+  if (verbose) {
+    .list_surveys(directory = directory, overwrite = overwrite)
+  } else {
+    suppressWarnings(suppressMessages(
+      .list_surveys(directory = directory, overwrite = overwrite)
+    ))
+  }
+}
+
+#' @autoglobal
+#' @note internal
+.list_surveys <- function(
+  directory = contactsurveys_dir(),
+  overwrite = FALSE
+) {
   is_contactsurveys_dir <- identical(directory, contactsurveys_dir())
 
   if (!is_contactsurveys_dir) {
@@ -45,6 +64,8 @@ list_surveys <- function(directory = contactsurveys_dir(), overwrite = FALSE) {
     cli::cli_inform("Cached survey_list.rds could not be read; re-downloading.")
     unlink(survey_list_path, force = TRUE)
   }
+
+  cli::cli_progress_step("Downloading survey list from zenodo")
   record_list <-
     data.table(list_records(
       url = "https://zenodo.org/oai2d",

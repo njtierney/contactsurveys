@@ -37,6 +37,31 @@ download_survey <- function(
   overwrite = FALSE,
   timeout = 60
 ) {
+  if (verbose) {
+    .download_survey(
+      survey = survey,
+      directory = directory,
+      overwrite = overwrite,
+      timeout = timeout
+    )
+  } else {
+    suppressMessages(.download_survey(
+      survey = survey,
+      directory = directory,
+      overwrite = overwrite,
+      timeout = timeout
+    ))
+  }
+}
+
+#' @autoglobal
+#' @note internal
+.download_survey <- function(
+  survey,
+  directory = contactsurveys_dir(),
+  overwrite = FALSE,
+  timeout = 60
+) {
   check_survey_is_length_one(survey)
 
   survey <- clean_doi(survey)
@@ -71,7 +96,6 @@ download_survey <- function(
     cli::cli_inform("Downloading from {survey_url}.")
     records$downloadFiles(
       path = directory,
-      quiet = !verbose,
       overwrite = overwrite,
       timeout = timeout
     )
