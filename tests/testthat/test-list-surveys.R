@@ -1,4 +1,4 @@
-test_that("list of surveys is not empty", {
+test_that("list_surveys() caches to disk and returns non-empty result", {
   skip_if_offline("zenodo.org")
   skip_on_cran()
   skip_on_ci()
@@ -7,11 +7,7 @@ test_that("list of surveys is not empty", {
   expect_gt(nrow(dat), 0)
   expect_true(all(c("title", "creator") %in% names(dat)))
   # verify file exists
-  survey_path <- list.files(
-    path = contactsurveys_dir(),
-    pattern = "survey_list.rds",
-    full.names = TRUE
-  )
+  survey_path <- file.path(contactsurveys_dir(), "survey_list.rds")
   expect_true(file.exists(survey_path))
 
   # verify time taken is shorter on a second run
