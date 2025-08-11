@@ -1,4 +1,4 @@
-# list of surveys is not empty
+# list_surveys() caches to disk and returns non-empty result
 
     Code
       . <- list_surveys()

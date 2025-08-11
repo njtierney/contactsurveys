@@ -19,10 +19,10 @@ list_surveys <- function(directory = contactsurveys_dir(), overwrite = FALSE) {
       "Files already exist, and `overwrite = FALSE`; skipping download. ",
       "Set `overwrite = TRUE` to force a re-download."
     )
-    record_list <- tryCatch(readRDS(survey_list_path),
-      error = function(e) NULL
-    )
-    if (!is.null(record_list)) return(record_list)
+    record_list <- tryCatch(readRDS(survey_list_path), error = function(e) NULL)
+    if (!is.null(record_list)) {
+      return(record_list)
+    }
     message("Cached survey_list.rds could not be read; re-downloading.")
   }
   record_list <-

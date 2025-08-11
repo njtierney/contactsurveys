@@ -15,7 +15,7 @@ test_that("list_surveys() caches to disk and returns non-empty result", {
   mtime_before <- file.info(survey_path)$mtime
   . <- list_surveys() # nolint
   mtime_after <- file.info(survey_path)$mtime
-  expect_equal(mtime_after, mtime_before)
+  expect_identical(mtime_after, mtime_before)
   # verify message when overwrite = FALSE
   expect_snapshot(
     . <- list_surveys() # nolint
