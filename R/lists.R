@@ -35,7 +35,8 @@ list_surveys <- function(directory = contactsurveys_dir(), overwrite = FALSE) {
       )
     )
     record_list <- tryCatch(readRDS(survey_list_path), error = function(e) NULL)
-    if (!is.null(record_list)) {
+    record_list_exists <- !is.null(record_list)
+    if (record_list_exists) {
       return(record_list)
     }
     cli::cli_inform("Cached survey_list.rds could not be read; re-downloading.")
