@@ -17,14 +17,14 @@ operating system, powered by the base function, \code{\link[tools:userdir]{tools
 can override this by setting an environment variable, \code{CONTACTSURVEYS_HOME}.
 The functions \code{\link[=list_surveys]{list_surveys()}} and \code{\link[=download_survey]{download_survey()}} will use this default
 directory. You can also specify the \code{dir} argument in these functions in
-place of the default value, \code{contact_surveys_dir()}. This approach has been
-borrowed from Carl Boetigger's \code{neonstore} R package.
+place of the default value, \code{contactsurveys_dir()}. This approach has been
+borrowed from Carl Boettiger's \code{neonstore} R package.
 }
 \examples{
 
 contactsurveys_dir()
 
-## Override with an environmental variable:
+## Override with an environment variable:
 Sys.setenv(CONTACTSURVEYS_HOME = tempdir())
 contactsurveys_dir()
 ## Unset

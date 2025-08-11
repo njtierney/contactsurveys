@@ -21,9 +21,9 @@ is to use the directory for your system using \code{\link[=contactsurveys_dir]{c
 uses \code{\link[tools:userdir]{tools::R_user_dir()}}. This effectively caches the data. You can
 specify your own directory, or set an environment variable,
 \code{CONTACTSURVEYS_HOME}, see \code{\link[=Sys.setenv]{Sys.setenv()}} or \link{Renviron} for more detail.
-If this argument is set to something other than \code{\link[=contactsurveys_dir]{contactsurveys_dir()}} it
-will give a warning, as we the user to avoid downloading data if they do
-not need to.}
+If this argument is set to something other than \code{\link[=contactsurveys_dir]{contactsurveys_dir()}}, a
+warning is issued to discourage unnecessary downloads outside the persistent
+cache.}
 
 \item{verbose}{Whether downloads should be echoed to output. Default TRUE.}
 

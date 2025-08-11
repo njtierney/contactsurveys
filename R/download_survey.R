@@ -10,9 +10,9 @@
 #'  uses [tools::R_user_dir()]. This effectively caches the data. You can
 #'  specify your own directory, or set an environment variable,
 #'  `CONTACTSURVEYS_HOME`, see [Sys.setenv()] or [Renviron] for more detail.
-#'  If this argument is set to something other than [contactsurveys_dir()] it
-#'  will give a warning, as we the user to avoid downloading data if they do
-#'  not need to.
+#'  If this argument is set to something other than [contactsurveys_dir()], a
+#'  warning is issued to discourage unnecessary downloads outside the persistent
+#'  cache.
 #' @param verbose Whether downloads should be echoed to output. Default TRUE.
 #' @param overwrite If files should be overwritten if they already exist.
 #'   Default FALSE
@@ -79,7 +79,7 @@ download_survey <- function(
       "Files already exist, and `overwrite = FALSE`; skipping download. ",
       "Set `overwrite = TRUE` to force a re-download."
     )
-    return(NULL)
+    return(zenodo_files(directory, records))
   } else {
     message("Downloading from ", survey_url, ".")
     records$downloadFiles(
