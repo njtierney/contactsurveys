@@ -11,12 +11,25 @@
 #' }
 #' @export
 list_surveys <- function(directory = contactsurveys_dir(), overwrite = FALSE) {
+  is_contactsurveys_dir <- identical(directory, contactsurveys_dir())
+
+  if (!is_contactsurveys_dir) {
+    warning(
+      "Directory differs from `contactsurveys_dir()`; \\
+      files may persist between R sessions. ",
+      "See `?contactsurveys_dir()` for more details.",
+      call. = FALSE
+    )
+  }
+
   survey_list_path <- file.path(directory, "survey_list.rds")
   survey_list_exists <- file.exists(survey_list_path)
   do_not_download <- survey_list_exists && !overwrite
   if (do_not_download) {
     message(
-      "Files already exist, and `overwrite = FALSE`; skipping download. ",
+      "Files already exist at: ",
+      survey_list_path,
+      "; and `overwrite = FALSE`; skipping download. ",
       "Set `overwrite = TRUE` to force a re-download."
     )
     record_list <- tryCatch(readRDS(survey_list_path), error = function(e) NULL)

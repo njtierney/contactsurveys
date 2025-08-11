@@ -17,7 +17,8 @@ test_that("list_surveys() caches to disk and returns non-empty result", {
   mtime_after <- file.info(survey_path)$mtime
   expect_identical(mtime_after, mtime_before)
   # verify message when overwrite = FALSE
-  expect_snapshot(
-    . <- list_surveys() # nolint
+  expect_message(
+    object = list_surveys(),
+    regexp = "Files already exist at:"
   )
 })
