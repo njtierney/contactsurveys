@@ -24,6 +24,7 @@ list_surveys <- function(directory = contactsurveys_dir(), overwrite = FALSE) {
       return(record_list)
     }
     message("Cached survey_list.rds could not be read; re-downloading.")
+    unlink(survey_list_path, force = TRUE)
   }
   record_list <-
     data.table(list_records(
