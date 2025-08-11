@@ -37,51 +37,38 @@ download_survey <- function(
   overwrite = FALSE,
   timeout = 60
 ) {
-  if (!is.character(survey) || length(survey) > 1) {
-    stop("'survey' must be a character of length 1", call. = FALSE)
-  }
+  check_survey_is_length_one(survey)
 
-  survey <- sub("^(https?:\\/\\/(dx\\.)?doi\\.org\\/|doi:)", "", survey)
-  survey <- sub("#.*$", "", survey)
-  is.doi <- is_doi(survey)
-  is.url <- is.doi || grepl("^https?:\\/\\/", survey)
+  survey <- clean_doi(survey)
 
-  if (!is.url) {
-    stop("'survey' is not a DOI or URL.", call. = FALSE)
-  }
+  check_survey_is_url_doi(survey)
 
-  is_contactsurveys_dir <- identical(directory, contactsurveys_dir())
+  check_directory(directory)
 
-  if (!is_contactsurveys_dir) {
-    warning(
-      "Directory differs from `contactsurveys_dir()`; \\
-      files may persist between R sessions. ",
-      "See `?contactsurveys_dir()` for more details.",
-      call. = FALSE
-    )
-  }
-
-  if (is.doi) {
-    survey_url <- paste0("https://doi.org/", survey)
+  if (is_doi(survey)) {
+    survey_url <- paste0("https://doi.org/", survey) # nolint
   } else {
-    survey_url <- survey
+    survey_url <- survey # nolint
   }
 
   ensure_dir_exists(directory)
 
-  message("Fetching contact survey filenames from DOI ", survey_url, ".")
+  cli::cli_inform("Fetching contact survey filenames from: {survey_url}.")
   records <- get_zenodo(survey)
 
   files_already_exist <- zenodo_files_exist(directory, records)
   do_not_download <- files_already_exist && !overwrite
   if (do_not_download) {
-    message(
-      "Files already exist, and `overwrite = FALSE`; skipping download. ",
-      "Set `overwrite = TRUE` to force a re-download."
+    cli::cli_inform(
+      c(
+        "Skipping download.",
+        "i" = "Files already exist, and {.code overwrite = FALSE}", # nolint
+        "i" = "Set {.code overwrite = TRUE} to force a re-download." # nolint
+      )
     )
     return(zenodo_files(directory, records))
   } else {
-    message("Downloading from ", survey_url, ".")
+    cli::cli_inform("Downloading from {survey_url}.")
     records$downloadFiles(
       path = directory,
       quiet = !verbose,
@@ -99,4 +86,11 @@ download_survey <- function(
 ##' @author Sebastian Funk
 is_doi <- function(x) {
   is.character(x) && grepl("^10.[0-9.]{4,}/[-._;()/:A-z0-9]+$", x)
+}
+
+#' @note internal
+clean_doi <- function(x) {
+  x <- sub("^(https?:\\/\\/(dx\\.)?doi\\.org\\/|doi:)", "", x)
+  x <- sub("#.*$", "", x)
+  x
 }
