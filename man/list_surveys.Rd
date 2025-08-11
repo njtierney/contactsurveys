@@ -4,16 +4,23 @@
 \alias{list_surveys}
 \title{List all surveys available for download}
 \usage{
-list_surveys(clear_cache = FALSE)
+list_surveys(directory = contactsurveys_dir(), overwrite = FALSE)
 }
 \arguments{
-\item{clear_cache}{logical, whether to clear the cache before downloading
-the survey; by default, the cache is not cleared and so multiple calls of
-this function to access the same survey will not result in repeated
-downloads.}
+\item{directory}{Directory of where to save survey files. The default value
+is to use the directory for your system using \code{\link[=contactsurveys_dir]{contactsurveys_dir()}}, which
+uses \code{\link[tools:userdir]{tools::R_user_dir()}}. This effectively caches the data. You can
+specify your own directory, or set an environment variable,
+\code{CONTACTSURVEYS_HOME}, see \code{\link[=Sys.setenv]{Sys.setenv()}} or \link{Renviron} for more detail.
+If this argument is set to something other than \code{\link[=contactsurveys_dir]{contactsurveys_dir()}}, a
+warning is issued to discourage unnecessary downloads outside the persistent
+cache.}
+
+\item{overwrite}{If files should be overwritten if they already exist.
+Default FALSE}
 }
 \value{
-character vector of surveys
+data.table with columns: date_added, title, creator, url
 }
 \description{
 List all surveys available for download

@@ -1,6 +1,6 @@
 Package: contactsurveys
 Title: Download Contact Surveys for use in Infectious Disease Modelling
-Version: 0.4.0.9000
+Version: 0.0.0.9000
 Authors@R: c(
     person("Sebastian", "Funk", , "sebastian.funk@lshtm.ac.uk", role = c("aut", "cre")),
     person("Lander", "Willem", role = "aut"),
@@ -20,14 +20,14 @@ Depends:
     R (>= 4.1.0)
 Imports:
     data.table,
-    memoise,
     oai,
     zen4R (>= 0.10.2)
 Suggests:
     knitr,
     rmarkdown,
     roxyglobals,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    withr
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

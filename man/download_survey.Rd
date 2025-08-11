@@ -6,9 +6,9 @@
 \usage{
 download_survey(
   survey,
-  directory = tempdir(),
+  directory = contactsurveys_dir(),
   verbose = TRUE,
-  overwrite = TRUE,
+  overwrite = FALSE,
   timeout = 60
 )
 }
@@ -16,13 +16,19 @@ download_survey(
 \item{survey}{A DOI of a survey, (see \code{\link[=list_surveys]{list_surveys()}}). If a HTML link is
 given, the DOI will be isolated and used.}
 
-\item{directory}{a directory to save the files to; if not given, will save to a
-temporary directory}
+\item{directory}{Directory of where to save survey files. The default value
+is to use the directory for your system using \code{\link[=contactsurveys_dir]{contactsurveys_dir()}}, which
+uses \code{\link[tools:userdir]{tools::R_user_dir()}}. This effectively caches the data. You can
+specify your own directory, or set an environment variable,
+\code{CONTACTSURVEYS_HOME}, see \code{\link[=Sys.setenv]{Sys.setenv()}} or \link{Renviron} for more detail.
+If this argument is set to something other than \code{\link[=contactsurveys_dir]{contactsurveys_dir()}}, a
+warning is issued to discourage unnecessary downloads outside the persistent
+cache.}
 
 \item{verbose}{Whether downloads should be echoed to output. Default TRUE.}
 
 \item{overwrite}{If files should be overwritten if they already exist.
-Default TRUE.}
+Default FALSE}
 
 \item{timeout}{A numeric value specifying timeout in seconds. Default 60
 seconds.}
@@ -31,10 +37,11 @@ seconds.}
 a vector of filenames, where the surveys were downloaded
 }
 \description{
-Downloads survey data
+Downloads survey data. Uses a caching mechanism via the default
+argument for \code{directory}.
 }
 \examples{
-\dontrun{
+\donttest{
 list_surveys()
 peru_survey <- download_survey("https://doi.org/10.5281/zenodo.1095664")
 }
