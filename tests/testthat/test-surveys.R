@@ -3,7 +3,11 @@ test_that("surveys can be downloaded with download_survey()", {
   skip_on_cran()
 
   doi_peru <- "10.5281/zenodo.1095664" # nolint
-  peru_survey_files <- suppressMessages(download_survey(doi_peru)) # nolint
+  # nolint start
+  ds_time1 <- system.time(
+    peru_survey_files <- suppressMessages(download_survey(doi_peru))
+  )
+  # nolint end
 
   expect_true(all(file.exists(peru_survey_files)))
   # expect contains peru
@@ -15,8 +19,14 @@ test_that("surveys can be downloaded with download_survey()", {
   )
 
   # expect files are the same
-  peru_2 <- suppressMessages(download_survey(doi_peru, overwrite = FALSE))
+  # nolint start
+  ds_time2 <- system.time(
+    peru_2 <- suppressMessages(download_survey(doi_peru, overwrite = FALSE))
+  )
+  # nolint end
   expect_identical(basename(peru_2), basename(peru_survey_files))
+
+  expect_lt(ds_time2["elapsed"], ds_time1["elapsed"])
 })
 
 test_that("multiple DOI's cannot be loaded", {
