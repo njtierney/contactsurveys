@@ -37,37 +37,15 @@ download_survey <- function(
   overwrite = FALSE,
   timeout = 60
 ) {
-  if (!is.character(survey) || length(survey) > 1) {
-    cli::cli_abort("{.arg survey} must be a character of length 1.")
-  }
+  check_survey_is_length_one(survey)
 
-  survey <- sub("^(https?:\\/\\/(dx\\.)?doi\\.org\\/|doi:)", "", survey)
-  survey <- sub("#.*$", "", survey)
-  is.doi <- is_doi(survey)
-  is.url <- is.doi || grepl("^https?:\\/\\/", survey)
+  survey <- clean_doi(survey)
 
-  if (!is.url) {
-    cli::cli_abort(
-      c(
-        "'survey' must be a DOI or URL.",
-        "We see: {.val survey}"
-      )
-    )
-  }
+  check_survey_is_url_doi(survey)
 
-  is_contactsurveys_dir <- identical(directory, contactsurveys_dir())
+  check_directory(directory)
 
-  if (!is_contactsurveys_dir) {
-    cli::cli_warn(
-      c(
-        "Directory differs from {.fn contactsurveys_dir}",
-        "!" = "files may persist between R sessions.",
-        "i" = "See {.fn contactsurveys_dir} for more details."
-      )
-    )
-  }
-
-  if (is.doi) {
+  if (is_doi(survey)) {
     survey_url <- paste0("https://doi.org/", survey)
   } else {
     survey_url <- survey
@@ -107,4 +85,11 @@ download_survey <- function(
 ##' @author Sebastian Funk
 is_doi <- function(x) {
   is.character(x) && grepl("^10.[0-9.]{4,}/[-._;()/:A-z0-9]+$", x)
+}
+
+#' @note internal
+clean_doi <- function(x) {
+  x <- sub("^(https?:\\/\\/(dx\\.)?doi\\.org\\/|doi:)", "", x)
+  x <- sub("#.*$", "", x)
+  x
 }

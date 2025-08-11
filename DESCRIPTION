@@ -22,6 +22,7 @@ Imports:
     cli,
     data.table,
     oai,
+    rlang,
     zen4R (>= 0.10.2)
 Suggests:
     knitr,
