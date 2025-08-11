@@ -23,9 +23,9 @@
 #' Sys.unsetenv("CONTACTSURVEYS_HOME")
 #'
 contactsurveys_dir <- function() {
-  dir <- Sys.getenv("CONTACTSURVEYS_HOME", unset = NA_character_)
-  if (is.na(dir) || !nzchar(dir)) {
-    dir <- tools::R_user_dir("contactsurveys")
+  cs_dir <- Sys.getenv("CONTACTSURVEYS_HOME", unset = NA_character_)
+  if (is.na(cs_dir) || !nzchar(cs_dir)) {
+    cs_dir <- tools::R_user_dir("contactsurveys")
   }
-  dir
+  cs_dir
 }
