@@ -23,7 +23,7 @@ Imports:
     data.table,
     oai,
     rlang (>= 1.0.0),
-    zen4R (>= 0.10.2)
+    zen4R (>= 0.10.3)
 Suggests:
     knitr,
     rmarkdown,
@@ -43,3 +43,5 @@ Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
 Config/testthat/edition: 3
 Config/roxyglobals/filename: globals.R
 Config/roxyglobals/unique: FALSE
+Remotes:  
+    eblondel/zen4R
