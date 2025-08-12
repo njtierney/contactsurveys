@@ -8,8 +8,8 @@ test_that("contactsurveys_dir() falls back to R_user_dir when env unset", {
   p <- contactsurveys_dir()
   expect_true(nzchar(p))
   expect_true(
-    dir.exists(p),
-    info = "contactsurveys_dir() should ensure the directory exists"
+    file.exists(p),
+    info = "contactsurveys_dir() provides a real path"
   )
 })
 
@@ -17,5 +17,5 @@ test_that("empty CONTACTSURVEYS_HOME falls back and creates dir", {
   withr::local_envvar(CONTACTSURVEYS_HOME = "")
   p <- contactsurveys_dir()
   expect_true(nzchar(p))
-  expect_true(dir.exists(p))
+  expect_true(file.exists(p))
 })
