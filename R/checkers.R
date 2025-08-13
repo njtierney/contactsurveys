@@ -16,14 +16,18 @@ check_survey_is_length_one <- function(survey, call = rlang::caller_env()) {
   }
 }
 
-check_survey_is_url_doi <- function(survey, call = rlang::caller_env()) {
-  is_url <- is_doi(survey) || grepl("^https?://", survey)
+check_is_url_doi <- function(
+  x,
+  call = rlang::caller_env(),
+  arg = rlang::caller_arg(x)
+) {
+  is_url <- is_doi(x) || grepl("^https?://", x)
   not_url <- !isTRUE(is_url)
   if (not_url) {
     cli::cli_abort(
       message = c(
-        "'survey' must be a DOI or URL.",
-        "We see: {.val survey}"
+        "{.arg {arg}} must be a DOI or URL.",
+        "We see: {.val {x}}"
       ),
       call = call
     )
