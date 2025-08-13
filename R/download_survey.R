@@ -66,7 +66,7 @@ download_survey <- function(
 
   survey <- clean_doi(survey)
 
-  check_survey_is_url_doi(survey)
+  check_is_url_doi(survey)
 
   check_directory(directory)
 

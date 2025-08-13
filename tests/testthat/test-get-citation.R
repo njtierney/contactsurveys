@@ -1,0 +1,17 @@
+test_that("get_citation() works", {
+  skip_if_offline("zenodo.org")
+  skip_on_cran()
+  polymod_doi <- "https://doi.org/10.5281/zenodo.3874557"
+  polymod_citation <- get_citation(polymod_doi)
+  expect_type(polymod_citation, "character")
+  expect_gt(nchar(polymod_citation), 1)
+  expect_match(polymod_citation, "Zenodo", fixed = TRUE)
+  expect_match(
+    polymod_citation,
+    "https://doi.org/10.5281/zenodo.3874557",
+    fixed = TRUE
+  )
+  # verbosity works
+  expect_message(get_citation(polymod_doi), "Citation fetched")
+  expect_snapshot(get_citation(polymod_doi, verbose = FALSE))
+})
