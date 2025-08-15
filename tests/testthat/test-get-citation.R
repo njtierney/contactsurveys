@@ -15,4 +15,10 @@ test_that("get_citation() works", {
   # verbosity works
   expect_message(get_citation(polymod_doi), "Citation fetched")
   expect_snapshot(get_citation(polymod_doi, verbose = FALSE))
+
+  # check error message for when invalid style used
+  expect_snapshot(
+    error = TRUE,
+    get_citation(polymod_doi, style = "mystery")
+  )
 })
