@@ -25,6 +25,7 @@ Imports:
     rlang (>= 1.0.0),
     zen4R (>= 0.10.3)
 Suggests:
+    socialmixr (>= 0.4.0.9000),
     knitr,
     rmarkdown,
     roxyglobals,
@@ -44,4 +45,5 @@ Config/testthat/edition: 3
 Config/roxyglobals/filename: globals.R
 Config/roxyglobals/unique: FALSE
 Remotes:  
-    eblondel/zen4R
+    eblondel/zen4R,
+    epiforecasts/socialmixr
