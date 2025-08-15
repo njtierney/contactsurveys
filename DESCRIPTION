@@ -23,12 +23,12 @@ Imports:
     data.table,
     oai,
     rlang (>= 1.0.0),
+    socialmixr (>= 0.4.0.9000),
     zen4R (>= 0.10.3)
 Suggests:
     knitr,
     rmarkdown,
     roxyglobals,
-    socialmixr,
     testthat (>= 3.0.0),
     withr
 VignetteBuilder: 
@@ -44,5 +44,6 @@ Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
 Config/testthat/edition: 3
 Config/roxyglobals/filename: globals.R
 Config/roxyglobals/unique: FALSE
-Remotes: 
-    eblondel/zen4R
+Remotes:  
+    eblondel/zen4R,
+    epiforecasts/socialmixr
