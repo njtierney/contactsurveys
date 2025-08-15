@@ -6,8 +6,8 @@
 \usage{
 get_citation(
   doi,
-  style = c("apa", "havard-cite-them-right", "modern-language-association", "vancouver",
-    "chicago-fullnote-bibliography", "ieee"),
+  style = c("bibtex", "apa", "havard-cite-them-right", "modern-language-association",
+    "vancouver", "chicago-fullnote-bibliography", "ieee"),
   verbose = TRUE
 )
 }

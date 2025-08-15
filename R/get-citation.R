@@ -20,6 +20,7 @@
 get_citation <- function(
   doi,
   style = c(
+    "bibtex",
     "apa",
     "havard-cite-them-right",
     "modern-language-association",
