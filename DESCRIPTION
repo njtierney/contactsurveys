@@ -28,6 +28,7 @@ Suggests:
     knitr,
     rmarkdown,
     roxyglobals,
+    socialmixr,
     testthat (>= 3.0.0),
     withr
 VignetteBuilder: 
@@ -43,5 +44,5 @@ Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
 Config/testthat/edition: 3
 Config/roxyglobals/filename: globals.R
 Config/roxyglobals/unique: FALSE
-Remotes:  
+Remotes: 
     eblondel/zen4R
