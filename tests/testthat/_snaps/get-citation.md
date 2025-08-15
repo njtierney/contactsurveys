@@ -3,5 +3,27 @@
     Code
       get_citation(polymod_doi, verbose = FALSE)
     Output
-      [1] "Joël Mossong, Niel Hens, Mark Jit, Philippe Beutels, Kari Auranen, Rafael Mikolajczyk, Marco Massari, Stefania Salmaso, Gianpaolo Scalia Tomba, Jacco Wallinga, Janneke Heijne, Malgorzata Sadkowska-Todys, Magdalena Rosinska, & W. John Edmunds. (2020). POLYMOD social contact data (Version 2) [Data set]. Zenodo. https://doi.org/10.5281/zenodo.3874557"
+      @dataset{joel_mossong_2020_3874557,
+        author       = {Joël Mossong and
+                        Niel Hens and
+                        Mark Jit and
+                        Philippe Beutels and
+                        Kari Auranen and
+                        Rafael Mikolajczyk and
+                        Marco Massari and
+                        Stefania Salmaso and
+                        Gianpaolo Scalia Tomba and
+                        Jacco Wallinga and
+                        Janneke Heijne and
+                        Malgorzata Sadkowska-Todys and
+                        Magdalena Rosinska and
+                        W. John Edmunds},
+        title        = {POLYMOD social contact data},
+        month        = jun,
+        year         = 2020,
+        publisher    = {Zenodo},
+        version      = 2,
+        doi          = {10.5281/zenodo.3874557},
+        url          = {https://doi.org/10.5281/zenodo.3874557},
+      }
 
