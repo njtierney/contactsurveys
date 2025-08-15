@@ -43,5 +43,13 @@ get_citation <- function(
       style = style
     )
   )
+
+  # add nicer print method for bibtex citation
+  if (style == "bibtex") {
+    class(doi_citation) <- c("csbib", class(doi_citation))
+  }
   doi_citation
 }
+
+#' @export
+print.csbib <- function(x, ...) cat(x)
