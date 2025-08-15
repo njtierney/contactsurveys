@@ -5,9 +5,10 @@
 #' the default citation style is "apa".
 #'
 #' @param doi A string, the Zenodo DOI or concept DOI.
-#' @param style A string, the citation style. Possible values are:
-#'  "havard-cite-them-right", "apa", "modern-language-association","vancouver",
-#'  "chicago-fullnote-bibliography", or "ieee".
+#' @param style A string, the citation style. Default is "bibtex". Possible
+#'   values are: "bibtex", "havard-cite-them-right", "apa",
+#'   "modern-language-association", "vancouver",
+#'   "chicago-fullnote-bibliography", or "ieee".
 #' @param verbose logical. Should messages during citation fetching print to
 #'   the screen? Default is TRUE.
 #'
@@ -20,6 +21,7 @@
 get_citation <- function(
   doi,
   style = c(
+    "bibtex",
     "apa",
     "havard-cite-them-right",
     "modern-language-association",
@@ -35,12 +37,24 @@ get_citation <- function(
       msg_done = "Citation fetched!"
     )
   }
-  style <- match.arg(style)
+
+  style <- rlang::arg_match(style)
   doi_citation <- suppressMessages(
     zen4R::get_citation(
       doi = doi,
       style = style
     )
   )
+
+  # add nicer print method for bibtex citation
+  if (style == "bibtex") {
+    class(doi_citation) <- c("csbib", class(doi_citation))
+  }
   doi_citation
+}
+
+#' @export
+print.csbib <- function(x, ...) {
+  cat(x, sep = "", "\n")
+  invisible(x)
 }

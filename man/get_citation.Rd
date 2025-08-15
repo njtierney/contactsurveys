@@ -6,16 +6,17 @@
 \usage{
 get_citation(
   doi,
-  style = c("apa", "havard-cite-them-right", "modern-language-association", "vancouver",
-    "chicago-fullnote-bibliography", "ieee"),
+  style = c("bibtex", "apa", "havard-cite-them-right", "modern-language-association",
+    "vancouver", "chicago-fullnote-bibliography", "ieee"),
   verbose = TRUE
 )
 }
 \arguments{
 \item{doi}{A string, the Zenodo DOI or concept DOI.}
 
-\item{style}{A string, the citation style. Possible values are:
-"havard-cite-them-right", "apa", "modern-language-association","vancouver",
+\item{style}{A string, the citation style. Default is "bibtex". Possible
+values are: "bibtex", "havard-cite-them-right", "apa",
+"modern-language-association", "vancouver",
 "chicago-fullnote-bibliography", or "ieee".}
 
 \item{verbose}{logical. Should messages during citation fetching print to
