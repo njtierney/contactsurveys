@@ -36,7 +36,8 @@ get_citation <- function(
       msg_done = "Citation fetched!"
     )
   }
-  style <- match.arg(style)
+
+  style <- rlang::arg_match(style)
   doi_citation <- suppressMessages(
     zen4R::get_citation(
       doi = doi,
