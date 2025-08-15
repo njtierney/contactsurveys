@@ -53,4 +53,7 @@ get_citation <- function(
 }
 
 #' @export
-print.csbib <- function(x, ...) cat(x)
+print.csbib <- function(x, ...) {
+  cat(x, sep = "", "\n")
+  invisible(x)
+}
