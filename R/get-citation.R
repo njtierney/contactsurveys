@@ -5,9 +5,10 @@
 #' the default citation style is "apa".
 #'
 #' @param doi A string, the Zenodo DOI or concept DOI.
-#' @param style A string, the citation style. Possible values are:
-#'  "havard-cite-them-right", "apa", "modern-language-association","vancouver",
-#'  "chicago-fullnote-bibliography", or "ieee".
+#' @param style A string, the citation style. Default is "bibtex". Possible
+#'   values are: "bibtex", "havard-cite-them-right", "apa",
+#'   "modern-language-association", "vancouver",
+#'   "chicago-fullnote-bibliography", or "ieee".
 #' @param verbose logical. Should messages during citation fetching print to
 #'   the screen? Default is TRUE.
 #'
