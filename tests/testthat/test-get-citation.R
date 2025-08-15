@@ -19,6 +19,6 @@ test_that("get_citation() works", {
   # check error message for when invalid style used
   expect_snapshot(
     error = TRUE,
-    get_citation(polymod_doi, style = "mystery")
+    get_citation(polymod_doi, style = "mystery", verbose = FALSE)
   )
 })
