@@ -1,18 +1,23 @@
-polymod_url <- "https://doi.org/10.5281/zenodo.3874557"
-peru_url <- "https://doi.org/10.5281/zenodo.1095664"
-polymod_survey <- download_survey(polymod_url)
-Sys.sleep(5)
-peru_survey <- download_survey(peru_url)
+test_that("socialmixr::load_survey()/as_contact_survey()/clean() works", {
+  skip_if_not_installed("socialmixr")
+  skip_if_offline("doi.org")
+  skip_if_offline("zenodo.org")
+  skip_on_cran()
 
-polymod_loaded <- suppressWarnings(socialmixr::load_survey(polymod_survey))
-peru_loaded <- suppressWarnings(socialmixr::load_survey(peru_survey))
-test_that("socialmixr::load_survey()/as_contact_survey()/clean(), works", {
+  polymod_url <- "https://doi.org/10.5281/zenodo.3874557"
+  peru_url <- "https://doi.org/10.5281/zenodo.1095664"
+
+  polymod_survey <- suppressMessages(download_survey(polymod_url))
+  Sys.sleep(5)
+  peru_survey <- suppressMessages(download_survey(peru_url))
+
+  polymod_loaded <- suppressWarnings(socialmixr::load_survey(polymod_survey))
+  expect_no_error(socialmixr::clean(polymod_loaded))
   expect_no_error(suppressWarnings(socialmixr::load_survey(polymod_survey)))
   expect_no_error(suppressWarnings(socialmixr::as_contact_survey(
     polymod_loaded
   )))
-  expect_no_error(socialmixr::clean(polymod_loaded))
-
+  peru_loaded <- suppressWarnings(socialmixr::load_survey(peru_survey))
   expect_no_error(suppressWarnings(socialmixr::load_survey(peru_survey)))
   expect_no_error(suppressWarnings(socialmixr::as_contact_survey(peru_loaded)))
   expect_no_error(socialmixr::clean(peru_loaded))
@@ -20,6 +25,22 @@ test_that("socialmixr::load_survey()/as_contact_survey()/clean(), works", {
 
 
 test_that("socialmixr::contact_matrix() works", {
+  skip_if_not_installed("socialmixr")
+  skip_if_offline("doi.org")
+  skip_if_offline("zenodo.org")
+  skip_on_cran()
+
+  polymod_url <- "https://doi.org/10.5281/zenodo.3874557"
+  peru_url <- "https://doi.org/10.5281/zenodo.1095664"
+
+  polymod_loaded <- suppressWarnings(
+    socialmixr::load_survey(suppressMessages(download_survey(polymod_url)))
+  )
+  Sys.sleep(5)
+  peru_loaded <- suppressWarnings(
+    socialmixr::load_survey(suppressMessages(download_survey(peru_url)))
+  )
+
   expect_no_error(socialmixr::contact_matrix(polymod_loaded))
   expect_no_error(
     socialmixr::contact_matrix(
@@ -28,7 +49,6 @@ test_that("socialmixr::contact_matrix() works", {
       age.limits = c(0, 18, 65)
     )$matrix
   )
-
   expect_no_error(socialmixr::contact_matrix(peru_loaded))
   expect_no_error(
     socialmixr::contact_matrix(
