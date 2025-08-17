@@ -22,5 +22,11 @@ cat("\n\nWarnings:\n\n")
 warnings()
 
 file_names_that_error <- names(error_messages)
+
+which_surveys_error <- which(names(survey_files) %in% file_names_that_error)
+the_surveys_that_error <- survey_files[which_surveys_error]
+
+load_survey(the_surveys_that_error[[1]])
+
 debugonce(load_survey)
 load_survey(survey_files[[file_names_that_error[1]]])
