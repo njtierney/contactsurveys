@@ -39,7 +39,10 @@ ensure_dir_exists <- function(directory) {
       !nzchar(directory)
   ) {
     cli::cli_abort(
-      "{.arg directory} must be a valid file path.",
+      message = c(
+        "{.arg directory} must be a valid file path.",
+        "We see: {.arg {directory}}"
+      ),
       call = rlang::caller_env()
     )
   }
