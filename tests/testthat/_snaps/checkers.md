@@ -14,5 +14,5 @@
     Condition
       Error:
       ! `directory` must be a valid file path.
-      We see: `123`
+      i We see: `123`
 

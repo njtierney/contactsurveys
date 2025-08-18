@@ -41,7 +41,7 @@ ensure_dir_exists <- function(directory) {
     cli::cli_abort(
       message = c(
         "{.arg directory} must be a valid file path.",
-        "We see: {.arg {directory}}"
+        "i" = "We see: {.arg {directory}}" # nolint
       ),
       call = rlang::caller_env()
     )
