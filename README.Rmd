@@ -10,7 +10,7 @@ output: github_document
 coverage](https://codecov.io/gh/epiforecasts/contactsurveys/graph/badge.svg)](https://app.codecov.io/gh/epiforecasts/contactsurveys)
 <!-- badges: end -->
 
-`contactsurveys` is an `R` package to download contact survey data, which can be used to derive social mixing matrices, see for example [socialmixr](https://github.com/epiforecasts/socialmixr). This code was initially in the [socialmixr](https://github.com/epiforecasts/socialmixr), but the specific code for downloading surveys has been placed into this package. 
+`contactsurveys` is an `R` package to download contact survey data, which can be used to derive social mixing matrices (see, for example, the [socialmixr](https://github.com/epiforecasts/socialmixr) package). This code was initially in the socialmixr package, but the code for downloading surveys has been moved into this package.
 
 # Installation
 
@@ -38,7 +38,7 @@ list_surveys()
 
 By default, the survey data from `list_surveys()` is effectively cached, so it will run very quickly the next time you run it. See `?list_surveys()` for more detail.
 
-## Downloading surveys()
+## Downloading surveys
 
 Surveys can be downloaded using `download_survey()`. This will get the relevant data of a survey given its Zenodo DOI (as returned by `list_surveys()`). 
 
@@ -50,7 +50,7 @@ polymod_survey_files
 
 ## Getting citations
 
-A reference for a given survey can be obtained using `get_citation()` and providing the DOI:
+A reference for any given survey can be obtained by passing a DOI to `get_citation()`:
 
 ```{r}
 get_citation(polymod_doi)
