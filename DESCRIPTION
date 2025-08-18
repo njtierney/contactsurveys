@@ -30,7 +30,8 @@ Suggests:
     rmarkdown,
     roxyglobals,
     testthat (>= 3.0.0),
-    withr
+    withr,
+    vcr (>= 2.0.0)
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
@@ -44,6 +45,6 @@ Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
 Config/testthat/edition: 3
 Config/roxyglobals/filename: globals.R
 Config/roxyglobals/unique: FALSE
-Remotes:  
+Remotes: 
     eblondel/zen4R,
     epiforecasts/socialmixr
