@@ -11,7 +11,8 @@ Authors@R: c(
     person("Christopher", "Jarvis", role = "ctb"),
     person("Alexis", "Robert", , "alexis.robert@lshtm.ac.uk", role = "ctb"),
     person("Niel", "Hens", role = "ctb"),
-    person("Pietro", "Coletti", role = c("col", "dtm"))
+    person("Pietro", "Coletti", role = c("col", "dtm")),
+    person("Nicholas", "Tierney", , "nicholas.tierney@gmail.com", role = c("aut"))
   )
 Description: Provides methods for downloading contact surveys that are then 
   used in infectious disease modelling.

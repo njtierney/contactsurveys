@@ -10,26 +10,69 @@ output: github_document
 coverage](https://codecov.io/gh/epiforecasts/contactsurveys/graph/badge.svg)](https://app.codecov.io/gh/epiforecasts/contactsurveys)
 <!-- badges: end -->
 
-`contactsurveys` is an `R` package to download contacy survey data, which can be used to derive social mixing matrices, see for example [socialmixr](https://github.com/epiforecasts/socialmixr).
+`contactsurveys` is an `R` package to download contact survey data, which can be used to derive social mixing matrices (see, for example, the [socialmixr](https://github.com/epiforecasts/socialmixr) package). This code was initially in the socialmixr package, but the code for downloading surveys has been moved into this package.
 
 # Installation
 
-The package can be installed using
-
-The current development version can be installed using the `remotes` package
+The development version can be installed using `remotes`
 
 ```r
 remotes::install_github("epiforecasts/contactsurveys")
 ```
 
-# Documentation
+# Example usage
 
-For information on how to use the contactsurveys package, see the [introduction vignette](TODO).
+```{r setup, include = FALSE}
+library(contactsurveys)
+```
+
+`contactsurveys` provides access to all surveys in the [Social contact data](https://zenodo.org/communities/social_contact_data) community on [Zenodo](https://zenodo.org). 
+
+## Listing surveys
+
+The available surveys can be listed (if an internet connection is available) with `list_surveys()`
+
+```{r}
+list_surveys()
+```
+
+By default, the survey data from `list_surveys()` is effectively cached, so it will run very quickly the next time you run it. See `?list_surveys()` for more detail.
+
+## Downloading surveys
+
+Surveys can be downloaded using `download_survey()`. This will get the relevant data of a survey given its Zenodo DOI (as returned by `list_surveys()`). 
+
+```{r}
+polymod_doi <- "https://doi.org/10.5281/zenodo.3874557"
+polymod_survey_files <- download_survey(polymod_doi)
+polymod_survey_files
+```
+
+## Getting citations
+
+A reference for any given survey can be obtained by passing a DOI to `get_citation()`:
+
+```{r}
+get_citation(polymod_doi)
+```
+
+## Using contact matrices with socialmixr
+
+You can then use the survey files downloaded with functions from [socialmixr](https://github.com/epiforecasts/socialmixr), `load_survey()` and `contact_matrix()`.
+
+```{r}
+library(socialmixr)
+polymod_loaded <- load_survey(polymod_survey_files)
+uk_contact_matrix <- contact_matrix(
+      polymod_loaded,
+      countries = "United Kingdom",
+      age.limits = c(0, 18, 65)
+    )
+
+uk_contact_matrix
+```
 
 ## Contributors
-
-
-
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
