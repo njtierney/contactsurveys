@@ -52,20 +52,355 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><code>contactsurveys</code> is an <code>R</code> package to download contacy survey data, which can be used to derive social mixing matrices, see for example <a href="https://github.com/epiforecasts/socialmixr" class="external-link">socialmixr</a>.</p>
+<p><code>contactsurveys</code> is an <code>R</code> package to download contact survey data, which can be used to derive social mixing matrices (see, for example, the <a href="https://github.com/epiforecasts/socialmixr" class="external-link">socialmixr</a> package). This code was initially in the socialmixr package, but the code for downloading surveys has been moved into this package.</p>
 </div>
 <div class="section level1">
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h1>
-<p>The package can be installed using</p>
-<p>The current development version can be installed using the <code>remotes</code> package</p>
+<p>The development version can be installed using <code>remotes</code></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"epiforecasts/contactsurveys"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level1">
-<h1 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
+<h1 id="example-usage">Example usage<a class="anchor" aria-label="anchor" href="#example-usage"></a>
 </h1>
-<p>For information on how to use the contactsurveys package, see the <a href="TODO">introduction vignette</a>.</p>
+<p><code>contactsurveys</code> provides access to all surveys in the <a href="https://zenodo.org/communities/social_contact_data" class="external-link">Social contact data</a> community on <a href="https://zenodo.org" class="external-link">Zenodo</a>.</p>
+<div class="section level2">
+<h2 id="listing-surveys">Listing surveys<a class="anchor" aria-label="anchor" href="#listing-surveys"></a>
+</h2>
+<p>The available surveys can be listed (if an internet connection is available) with <code><a href="reference/list_surveys.html">list_surveys()</a></code></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/list_surveys.html">list_surveys</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="do">## ℹ Downloading survey list from zenodo</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="do">## ✔ Downloading survey list from zenodo [17.8s]</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="do">## Key: &lt;date_added&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="do">##     date_added</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="do">##         &lt;char&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="do">##  1: 2017-11-07</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="do">##  2: 2017-12-07</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="do">##  3: 2017-12-22</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="do">##  4: 2018-01-23</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="do">##  5: 2018-02-05</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="do">##  6: 2018-06-14</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="do">##  7: 2018-09-05</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="do">##  8: 2019-01-24</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="do">##  9: 2019-08-13</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="do">## 10: 2019-09-16</span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="do">## 11: 2020-08-06</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="do">## 12: 2020-09-30</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="do">## 13: 2020-09-30</span></span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a><span class="do">## 14: 2020-10-12</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="do">## 15: 2020-10-16</span></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="do">## 16: 2021-05-06</span></span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a><span class="do">## 17: 2021-05-20</span></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a><span class="do">## 18: 2021-05-25</span></span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a><span class="do">## 19: 2021-06-07</span></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="do">## 20: 2021-06-29</span></span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a><span class="do">## 21: 2021-06-29</span></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a><span class="do">## 22: 2021-06-29</span></span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a><span class="do">## 23: 2021-06-29</span></span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a><span class="do">## 24: 2021-06-29</span></span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a><span class="do">## 25: 2021-06-29</span></span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a><span class="do">## 26: 2021-07-03</span></span>
+<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a><span class="do">## 27: 2021-07-26</span></span>
+<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a><span class="do">## 28: 2021-07-26</span></span>
+<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a><span class="do">## 29: 2021-08-20</span></span>
+<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a><span class="do">## 30: 2022-04-11</span></span>
+<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a><span class="do">## 31: 2022-05-10</span></span>
+<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a><span class="do">## 32: 2022-05-10</span></span>
+<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a><span class="do">## 33: 2022-05-10</span></span>
+<span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a><span class="do">## 34: 2022-05-10</span></span>
+<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a><span class="do">## 35: 2022-05-12</span></span>
+<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a><span class="do">## 36: 2022-05-12</span></span>
+<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a><span class="do">## 37: 2022-05-12</span></span>
+<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a><span class="do">## 38: 2022-08-22</span></span>
+<span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a><span class="do">## 39: 2023-03-13</span></span>
+<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a><span class="do">## 40: 2023-05-24</span></span>
+<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a><span class="do">## 41: 2023-07-07</span></span>
+<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a><span class="do">## 42: 2024-03-05</span></span>
+<span id="cb3-52"><a href="#cb3-52" tabindex="-1"></a><span class="do">## 43: 2024-05-08</span></span>
+<span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a><span class="do">## 44: 2024-07-27</span></span>
+<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a><span class="do">## 45: 2025-01-30</span></span>
+<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a><span class="do">##     date_added</span></span>
+<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a><span class="do">##                                                                                           title</span></span>
+<span id="cb3-57"><a href="#cb3-57" tabindex="-1"></a><span class="do">##                                                                                          &lt;char&gt;</span></span>
+<span id="cb3-58"><a href="#cb3-58" tabindex="-1"></a><span class="do">##  1:                                                                 POLYMOD social contact data</span></span>
+<span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a><span class="do">##  2:                                                                Social contact data for Peru</span></span>
+<span id="cb3-60"><a href="#cb3-60" tabindex="-1"></a><span class="do">##  3:                                                            Social contact data for Zimbabwe</span></span>
+<span id="cb3-61"><a href="#cb3-61" tabindex="-1"></a><span class="do">##  4:                                                              Social contact data for France</span></span>
+<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a><span class="do">##  5:                                                           Social contact data for Hong Kong</span></span>
+<span id="cb3-63"><a href="#cb3-63" tabindex="-1"></a><span class="do">##  6:                                                             Social contact data for Vietnam</span></span>
+<span id="cb3-64"><a href="#cb3-64" tabindex="-1"></a><span class="do">##  7:                                                                  Social contact data for UK</span></span>
+<span id="cb3-65"><a href="#cb3-65" tabindex="-1"></a><span class="do">##  8:                              Social contact data for Zambia and South Africa (CODA dataset)</span></span>
+<span id="cb3-66"><a href="#cb3-66" tabindex="-1"></a><span class="do">##  9:                                                      Social contact data for China mainland</span></span>
+<span id="cb3-67"><a href="#cb3-67" tabindex="-1"></a><span class="do">## 10:                                                              Social contact data for Russia</span></span>
+<span id="cb3-68"><a href="#cb3-68" tabindex="-1"></a><span class="do">## 11:                                                        CoMix social contact data (Belgium )</span></span>
+<span id="cb3-69"><a href="#cb3-69" tabindex="-1"></a><span class="do">## 12:                                                 Social contact data for Belgium (2010-2011)</span></span>
+<span id="cb3-70"><a href="#cb3-70" tabindex="-1"></a><span class="do">## 13:                                                      Social contact data for Belgium (2006)</span></span>
+<span id="cb3-71"><a href="#cb3-71" tabindex="-1"></a><span class="do">## 14:                                     Social contact data before and during COVID-19 in China</span></span>
+<span id="cb3-72"><a href="#cb3-72" tabindex="-1"></a><span class="do">## 15:                                                            Social contact data for Thailand</span></span>
+<span id="cb3-73"><a href="#cb3-73" tabindex="-1"></a><span class="do">## 16:                                                     Social contact data for Thailand (2015)</span></span>
+<span id="cb3-74"><a href="#cb3-74" tabindex="-1"></a><span class="do">## 17:                                                         CoMix social contact data (Austria)</span></span>
+<span id="cb3-75"><a href="#cb3-75" tabindex="-1"></a><span class="do">## 18:                                                     CoMix social contact data (Netherlands)</span></span>
+<span id="cb3-76"><a href="#cb3-76" tabindex="-1"></a><span class="do">## 19:                                                              CoMix social contact data (UK)</span></span>
+<span id="cb3-77"><a href="#cb3-77" tabindex="-1"></a><span class="do">## 20:                                                         CoMix social contact data (Denmark)</span></span>
+<span id="cb3-78"><a href="#cb3-78" tabindex="-1"></a><span class="do">## 21:                                                           CoMix social contact data (Spain)</span></span>
+<span id="cb3-79"><a href="#cb3-79" tabindex="-1"></a><span class="do">## 22:                                                          CoMix social contact data (France)</span></span>
+<span id="cb3-80"><a href="#cb3-80" tabindex="-1"></a><span class="do">## 23:                                                           CoMix social contact data (Italy)</span></span>
+<span id="cb3-81"><a href="#cb3-81" tabindex="-1"></a><span class="do">## 24:                                                        CoMix social contact data (Portugal)</span></span>
+<span id="cb3-82"><a href="#cb3-82" tabindex="-1"></a><span class="do">## 25:                                                          CoMix social contact data (Poland)</span></span>
+<span id="cb3-83"><a href="#cb3-83" tabindex="-1"></a><span class="do">## 26:                                                     Social contact data for the Netherlands</span></span>
+<span id="cb3-84"><a href="#cb3-84" tabindex="-1"></a><span class="do">## 27:                                                          CoMix social contact data (Greece)</span></span>
+<span id="cb3-85"><a href="#cb3-85" tabindex="-1"></a><span class="do">## 28:                                                        CoMix social contact data (Slovenia)</span></span>
+<span id="cb3-86"><a href="#cb3-86" tabindex="-1"></a><span class="do">## 29:                                           Social contact data for IDPs in Somaliland (2019)</span></span>
+<span id="cb3-87"><a href="#cb3-87" tabindex="-1"></a><span class="do">## 30:                                                              Social contact data for Taiwan</span></span>
+<span id="cb3-88"><a href="#cb3-88" tabindex="-1"></a><span class="do">## 31:                                                         CoMix social contact data (Croatia)</span></span>
+<span id="cb3-89"><a href="#cb3-89" tabindex="-1"></a><span class="do">## 32:                                                        CoMix social contact data (Slovakia)</span></span>
+<span id="cb3-90"><a href="#cb3-90" tabindex="-1"></a><span class="do">## 33:                                                         CoMix social contact data (Hungary)</span></span>
+<span id="cb3-91"><a href="#cb3-91" tabindex="-1"></a><span class="do">## 34:                                                         CoMix social contact data (Estonia)</span></span>
+<span id="cb3-92"><a href="#cb3-92" tabindex="-1"></a><span class="do">## 35:                                                       CoMix social contact data (Lithuania)</span></span>
+<span id="cb3-93"><a href="#cb3-93" tabindex="-1"></a><span class="do">## 36:                                                         CoMix social contact data (Finland)</span></span>
+<span id="cb3-94"><a href="#cb3-94" tabindex="-1"></a><span class="do">## 37:                                                     CoMix social contact data (Switzerland)</span></span>
+<span id="cb3-95"><a href="#cb3-95" tabindex="-1"></a><span class="do">## 38:                                                               CoMix 2.0 social contact data</span></span>
+<span id="cb3-96"><a href="#cb3-96" tabindex="-1"></a><span class="do">## 39:                               Contact data of older adults (70+) in the Netherlands in 2021</span></span>
+<span id="cb3-97"><a href="#cb3-97" tabindex="-1"></a><span class="do">## 40:                                                          Household contact survey (Belgium)</span></span>
+<span id="cb3-98"><a href="#cb3-98" tabindex="-1"></a><span class="do">## 41:                                       Contact data of Children in Belgium, Italy and Poland</span></span>
+<span id="cb3-99"><a href="#cb3-99" tabindex="-1"></a><span class="do">## 42:        Contact data of Pienter3 (2016-2017) and PiCo (2020-2023) studies in the Netherlands</span></span>
+<span id="cb3-100"><a href="#cb3-100" tabindex="-1"></a><span class="do">## 43:                                                CoMix data (last round in BE, CH, NL and UK)</span></span>
+<span id="cb3-101"><a href="#cb3-101" tabindex="-1"></a><span class="do">## 44:                           Social contact data for the BHDSS and FWHDSS in the Gambia (2022)</span></span>
+<span id="cb3-102"><a href="#cb3-102" tabindex="-1"></a><span class="do">## 45: Social mixing patterns of United States health care personnel at a quaternary health center</span></span>
+<span id="cb3-103"><a href="#cb3-103" tabindex="-1"></a><span class="do">##                                                                                           title</span></span>
+<span id="cb3-104"><a href="#cb3-104" tabindex="-1"></a><span class="do">##                   creator                                     url</span></span>
+<span id="cb3-105"><a href="#cb3-105" tabindex="-1"></a><span class="do">##                    &lt;char&gt;                                  &lt;char&gt;</span></span>
+<span id="cb3-106"><a href="#cb3-106" tabindex="-1"></a><span class="do">##  1:          Joël Mossong  https://doi.org/10.5281/zenodo.3874557</span></span>
+<span id="cb3-107"><a href="#cb3-107" tabindex="-1"></a><span class="do">##  2:    Carlos G. Grijalva  https://doi.org/10.5281/zenodo.3874805</span></span>
+<span id="cb3-108"><a href="#cb3-108" tabindex="-1"></a><span class="do">##  3:      Alessia Melegaro  https://doi.org/10.5281/zenodo.3886638</span></span>
+<span id="cb3-109"><a href="#cb3-109" tabindex="-1"></a><span class="do">##  4:      Guillaume Béraud  https://doi.org/10.5281/zenodo.3886590</span></span>
+<span id="cb3-110"><a href="#cb3-110" tabindex="-1"></a><span class="do">##  5:          Kathy  Leung  https://doi.org/10.5281/zenodo.3874808</span></span>
+<span id="cb3-111"><a href="#cb3-111" tabindex="-1"></a><span class="do">##  6:           Horby Peter  https://doi.org/10.5281/zenodo.3874802</span></span>
+<span id="cb3-112"><a href="#cb3-112" tabindex="-1"></a><span class="do">##  7:   Albert Jan van Hoek  https://doi.org/10.5281/zenodo.3874717</span></span>
+<span id="cb3-113"><a href="#cb3-113" tabindex="-1"></a><span class="do">##  8:         Peter J. Dodd  https://doi.org/10.5281/zenodo.3874675</span></span>
+<span id="cb3-114"><a href="#cb3-114" tabindex="-1"></a><span class="do">##  9:       Zhang, Juanjuan  https://doi.org/10.5281/zenodo.3878754</span></span>
+<span id="cb3-115"><a href="#cb3-115" tabindex="-1"></a><span class="do">## 10:       Maria Litvinova  https://doi.org/10.5281/zenodo.3874674</span></span>
+<span id="cb3-116"><a href="#cb3-116" tabindex="-1"></a><span class="do">## 11:        Pietro Coletti https://doi.org/10.5281/zenodo.10549953</span></span>
+<span id="cb3-117"><a href="#cb3-117" tabindex="-1"></a><span class="do">## 12:         Willem Lander  https://doi.org/10.5281/zenodo.4302055</span></span>
+<span id="cb3-118"><a href="#cb3-118" tabindex="-1"></a><span class="do">## 13:             Hens Niel  https://doi.org/10.5281/zenodo.4059864</span></span>
+<span id="cb3-119"><a href="#cb3-119" tabindex="-1"></a><span class="do">## 14:        Zhang Juanjuan  https://doi.org/10.5281/zenodo.7326686</span></span>
+<span id="cb3-120"><a href="#cb3-120" tabindex="-1"></a><span class="do">## 15:        Mahikul Wiriya  https://doi.org/10.5281/zenodo.4086739</span></span>
+<span id="cb3-121"><a href="#cb3-121" tabindex="-1"></a><span class="do">## 16:    Weerasak Putthasri  https://doi.org/10.5281/zenodo.4739777</span></span>
+<span id="cb3-122"><a href="#cb3-122" tabindex="-1"></a><span class="do">## 17:            Gimma, Amy  https://doi.org/10.5281/zenodo.6362906</span></span>
+<span id="cb3-123"><a href="#cb3-123" tabindex="-1"></a><span class="do">## 18:       Backer, Jantien  https://doi.org/10.5281/zenodo.7276465</span></span>
+<span id="cb3-124"><a href="#cb3-124" tabindex="-1"></a><span class="do">## 19:            Gimma, Amy https://doi.org/10.5281/zenodo.13684044</span></span>
+<span id="cb3-125"><a href="#cb3-125" tabindex="-1"></a><span class="do">## 20:            Gimma, Amy  https://doi.org/10.5281/zenodo.6362899</span></span>
+<span id="cb3-126"><a href="#cb3-126" tabindex="-1"></a><span class="do">## 21:            Gimma, Amy  https://doi.org/10.5281/zenodo.6362898</span></span>
+<span id="cb3-127"><a href="#cb3-127" tabindex="-1"></a><span class="do">## 22:            Gimma, Amy  https://doi.org/10.5281/zenodo.6362893</span></span>
+<span id="cb3-128"><a href="#cb3-128" tabindex="-1"></a><span class="do">## 23:            Gimma, Amy  https://doi.org/10.5281/zenodo.6362888</span></span>
+<span id="cb3-129"><a href="#cb3-129" tabindex="-1"></a><span class="do">## 24:            Gimma, Amy  https://doi.org/10.5281/zenodo.6362887</span></span>
+<span id="cb3-130"><a href="#cb3-130" tabindex="-1"></a><span class="do">## 25:            Gimma, Amy  https://doi.org/10.5281/zenodo.6362879</span></span>
+<span id="cb3-131"><a href="#cb3-131" tabindex="-1"></a><span class="do">## 26: van de Kassteele, Jan  https://doi.org/10.5281/zenodo.5062244</span></span>
+<span id="cb3-132"><a href="#cb3-132" tabindex="-1"></a><span class="do">## 27:            Gimma, Amy  https://doi.org/10.5281/zenodo.6362870</span></span>
+<span id="cb3-133"><a href="#cb3-133" tabindex="-1"></a><span class="do">## 28:            Gimma, Amy  https://doi.org/10.5281/zenodo.6362865</span></span>
+<span id="cb3-134"><a href="#cb3-134" tabindex="-1"></a><span class="do">## 29:  van Zandvoort, Kevin  https://doi.org/10.5281/zenodo.7071876</span></span>
+<span id="cb3-135"><a href="#cb3-135" tabindex="-1"></a><span class="do">## 30:         Fu, Yang-Chih  https://doi.org/10.5281/zenodo.6385759</span></span>
+<span id="cb3-136"><a href="#cb3-136" tabindex="-1"></a><span class="do">## 31:            Gimma, Amy  https://doi.org/10.5281/zenodo.7257433</span></span>
+<span id="cb3-137"><a href="#cb3-137" tabindex="-1"></a><span class="do">## 32:            Gimma, Amy  https://doi.org/10.5281/zenodo.6535357</span></span>
+<span id="cb3-138"><a href="#cb3-138" tabindex="-1"></a><span class="do">## 33:            Gimma, Amy  https://doi.org/10.5281/zenodo.6535344</span></span>
+<span id="cb3-139"><a href="#cb3-139" tabindex="-1"></a><span class="do">## 34:            Gimma, Amy  https://doi.org/10.5281/zenodo.6535313</span></span>
+<span id="cb3-140"><a href="#cb3-140" tabindex="-1"></a><span class="do">## 35:            Gimma, Amy  https://doi.org/10.5281/zenodo.6542668</span></span>
+<span id="cb3-141"><a href="#cb3-141" tabindex="-1"></a><span class="do">## 36:            Gimma, Amy  https://doi.org/10.5281/zenodo.6542664</span></span>
+<span id="cb3-142"><a href="#cb3-142" tabindex="-1"></a><span class="do">## 37:            Gimma, Amy  https://doi.org/10.5281/zenodo.6542657</span></span>
+<span id="cb3-143"><a href="#cb3-143" tabindex="-1"></a><span class="do">## 38:       Coletti, Pietro  https://doi.org/10.5281/zenodo.7331926</span></span>
+<span id="cb3-144"><a href="#cb3-144" tabindex="-1"></a><span class="do">## 39:     Jantien A. Backer  https://doi.org/10.5281/zenodo.7751724</span></span>
+<span id="cb3-145"><a href="#cb3-145" tabindex="-1"></a><span class="do">## 40:      Goeyvaerts, Nele  https://doi.org/10.5281/zenodo.7965594</span></span>
+<span id="cb3-146"><a href="#cb3-146" tabindex="-1"></a><span class="do">## 41:        Coletti,Pietro  https://doi.org/10.5281/zenodo.8123632</span></span>
+<span id="cb3-147"><a href="#cb3-147" tabindex="-1"></a><span class="do">## 42:       Backer, Jantien https://doi.org/10.5281/zenodo.10370353</span></span>
+<span id="cb3-148"><a href="#cb3-148" tabindex="-1"></a><span class="do">## 43:   Jarvis, Christopher https://doi.org/10.5281/zenodo.11154066</span></span>
+<span id="cb3-149"><a href="#cb3-149" tabindex="-1"></a><span class="do">## 44:           Osei, Isaac https://doi.org/10.5281/zenodo.13101862</span></span>
+<span id="cb3-150"><a href="#cb3-150" tabindex="-1"></a><span class="do">## 45:       Pischel, Lauren https://doi.org/10.5281/zenodo.14156576</span></span>
+<span id="cb3-151"><a href="#cb3-151" tabindex="-1"></a><span class="do">##                   creator                                     url</span></span></code></pre></div>
+<p>By default, the survey data from <code><a href="reference/list_surveys.html">list_surveys()</a></code> is effectively cached, so it will run very quickly the next time you run it. See <code>?list_surveys()</code> for more detail.</p>
+</div>
+<div class="section level2">
+<h2 id="downloading-surveys">Downloading surveys<a class="anchor" aria-label="anchor" href="#downloading-surveys"></a>
+</h2>
+<p>Surveys can be downloaded using <code><a href="reference/download_survey.html">download_survey()</a></code>. This will get the relevant data of a survey given its Zenodo DOI (as returned by <code><a href="reference/list_surveys.html">list_surveys()</a></code>).</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">polymod_doi</span> <span class="op">&lt;-</span> <span class="st">"https://doi.org/10.5281/zenodo.3874557"</span></span>
+<span><span class="va">polymod_survey_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/download_survey.html">download_survey</a></span><span class="op">(</span><span class="va">polymod_doi</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## Fetching contact survey filenames from: https://doi.org/10.5281/zenodo.3874557.</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="do">## ℹ Successfully fetched list of published records - page 1</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="do">## ✔ Successfully fetched list of published records!</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="do">## ✔ Successfully fetched record for DOI '10.5281/zenodo.3874557'!</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="do">## Downloading from https://doi.org/10.5281/zenodo.3874557.</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="do">## ! Overwrite is 'false', aborting download of existing files</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="do">## ℹ Download in sequential mode</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="do">## [zen4R][INFO] ZenodoRecord - Download in sequential mode</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="do">## ℹ Will download 7 files from record '3874557' (doi: '10.5281/zenodo.3874557') - total size: 7.4 MiB</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="do">## [zen4R][INFO] ZenodoRecord - Will download 7 files from record '3874557' (doi: '10.5281/zenodo.3874557') - total size: 7.4 MiB</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="do">## ℹ Downloading file '2008_Mossong_POLYMOD_hh_common.csv' - size: 120 KiB</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="do">## [zen4R][INFO] Downloading file '2008_Mossong_POLYMOD_hh_common.csv' - size: 120 KiB</span></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a><span class="do">## ℹ Downloading file '2008_Mossong_POLYMOD_contact_common.csv' - size: 6.2 MiB</span></span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a><span class="do">## [zen4R][INFO] Downloading file '2008_Mossong_POLYMOD_contact_common.csv' - size: 6.2 MiB</span></span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a><span class="do">## ℹ Downloading file '2008_Mossong_POLYMOD_dictionary.xls' - size: 41 KiB</span></span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a><span class="do">## [zen4R][INFO] Downloading file '2008_Mossong_POLYMOD_dictionary.xls' - size: 41 KiB</span></span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a><span class="do">## ℹ Downloading file '2008_Mossong_POLYMOD_hh_extra.csv' - size: 523 KiB</span></span>
+<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a><span class="do">## [zen4R][INFO] Downloading file '2008_Mossong_POLYMOD_hh_extra.csv' - size: 523 KiB</span></span>
+<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a><span class="do">## ℹ Downloading file '2008_Mossong_POLYMOD_participant_common.csv' - size: 153.1 KiB</span></span>
+<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a><span class="do">## [zen4R][INFO] Downloading file '2008_Mossong_POLYMOD_participant_common.csv' - size: 153.1 KiB</span></span>
+<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a></span>
+<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a><span class="do">## ℹ Downloading file '2008_Mossong_POLYMOD_participant_extra.csv' - size: 221.8 KiB</span></span>
+<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a></span>
+<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a><span class="do">## [zen4R][INFO] Downloading file '2008_Mossong_POLYMOD_participant_extra.csv' - size: 221.8 KiB</span></span>
+<span id="cb5-42"><a href="#cb5-42" tabindex="-1"></a></span>
+<span id="cb5-43"><a href="#cb5-43" tabindex="-1"></a><span class="do">## ℹ Downloading file '2008_Mossong_POLYMOD_sday.csv' - size: 188.7 KiB</span></span>
+<span id="cb5-44"><a href="#cb5-44" tabindex="-1"></a></span>
+<span id="cb5-45"><a href="#cb5-45" tabindex="-1"></a><span class="do">## [zen4R][INFO] Downloading file '2008_Mossong_POLYMOD_sday.csv' - size: 188.7 KiB</span></span>
+<span id="cb5-46"><a href="#cb5-46" tabindex="-1"></a></span>
+<span id="cb5-47"><a href="#cb5-47" tabindex="-1"></a><span class="do">## ℹ Files downloaded at '/Users/runner/Library/Application Support/org.R-project.R/R/contactsurveys'.</span></span>
+<span id="cb5-48"><a href="#cb5-48" tabindex="-1"></a></span>
+<span id="cb5-49"><a href="#cb5-49" tabindex="-1"></a><span class="do">## [zen4R][INFO] Files downloaded at '/Users/runner/Library/Application Support/org.R-project.R/R/contactsurveys'.</span></span>
+<span id="cb5-50"><a href="#cb5-50" tabindex="-1"></a></span>
+<span id="cb5-51"><a href="#cb5-51" tabindex="-1"></a><span class="do">## ℹ Verifying file integrity...</span></span>
+<span id="cb5-52"><a href="#cb5-52" tabindex="-1"></a></span>
+<span id="cb5-53"><a href="#cb5-53" tabindex="-1"></a><span class="do">## [zen4R][INFO] ZenodoRecord - Verifying file integrity...</span></span>
+<span id="cb5-54"><a href="#cb5-54" tabindex="-1"></a></span>
+<span id="cb5-55"><a href="#cb5-55" tabindex="-1"></a><span class="do">## ℹ File '2008_Mossong_POLYMOD_hh_common.csv': integrity verified (md5sum: d7fb1359ad84dba8cce4c444063940aa)</span></span>
+<span id="cb5-56"><a href="#cb5-56" tabindex="-1"></a></span>
+<span id="cb5-57"><a href="#cb5-57" tabindex="-1"></a><span class="do">## [zen4R][INFO] File '2008_Mossong_POLYMOD_hh_common.csv': integrity verified (md5sum: d7fb1359ad84dba8cce4c444063940aa)</span></span>
+<span id="cb5-58"><a href="#cb5-58" tabindex="-1"></a></span>
+<span id="cb5-59"><a href="#cb5-59" tabindex="-1"></a><span class="do">## ℹ File '2008_Mossong_POLYMOD_contact_common.csv': integrity verified (md5sum: 52baf32033bf780786fae6604043ec00)</span></span>
+<span id="cb5-60"><a href="#cb5-60" tabindex="-1"></a></span>
+<span id="cb5-61"><a href="#cb5-61" tabindex="-1"></a><span class="do">## [zen4R][INFO] File '2008_Mossong_POLYMOD_contact_common.csv': integrity verified (md5sum: 52baf32033bf780786fae6604043ec00)</span></span>
+<span id="cb5-62"><a href="#cb5-62" tabindex="-1"></a></span>
+<span id="cb5-63"><a href="#cb5-63" tabindex="-1"></a><span class="do">## ℹ File '2008_Mossong_POLYMOD_dictionary.xls': integrity verified (md5sum: 06415516c91b52dedfaa53622e352647)</span></span>
+<span id="cb5-64"><a href="#cb5-64" tabindex="-1"></a></span>
+<span id="cb5-65"><a href="#cb5-65" tabindex="-1"></a><span class="do">## [zen4R][INFO] File '2008_Mossong_POLYMOD_dictionary.xls': integrity verified (md5sum: 06415516c91b52dedfaa53622e352647)</span></span>
+<span id="cb5-66"><a href="#cb5-66" tabindex="-1"></a></span>
+<span id="cb5-67"><a href="#cb5-67" tabindex="-1"></a><span class="do">## ℹ File '2008_Mossong_POLYMOD_hh_extra.csv': integrity verified (md5sum: b0063f8d1a4f391d919495493611b3f1)</span></span>
+<span id="cb5-68"><a href="#cb5-68" tabindex="-1"></a></span>
+<span id="cb5-69"><a href="#cb5-69" tabindex="-1"></a><span class="do">## [zen4R][INFO] File '2008_Mossong_POLYMOD_hh_extra.csv': integrity verified (md5sum: b0063f8d1a4f391d919495493611b3f1)</span></span>
+<span id="cb5-70"><a href="#cb5-70" tabindex="-1"></a></span>
+<span id="cb5-71"><a href="#cb5-71" tabindex="-1"></a><span class="do">## ℹ File '2008_Mossong_POLYMOD_participant_common.csv': integrity verified (md5sum: ac784c281a71e15c7e64eaf2d6365709)</span></span>
+<span id="cb5-72"><a href="#cb5-72" tabindex="-1"></a></span>
+<span id="cb5-73"><a href="#cb5-73" tabindex="-1"></a><span class="do">## [zen4R][INFO] File '2008_Mossong_POLYMOD_participant_common.csv': integrity verified (md5sum: ac784c281a71e15c7e64eaf2d6365709)</span></span>
+<span id="cb5-74"><a href="#cb5-74" tabindex="-1"></a></span>
+<span id="cb5-75"><a href="#cb5-75" tabindex="-1"></a><span class="do">## ℹ File '2008_Mossong_POLYMOD_participant_extra.csv': integrity verified (md5sum: 4e2dd8d6ba2d23bb5b1f236be215b936)</span></span>
+<span id="cb5-76"><a href="#cb5-76" tabindex="-1"></a></span>
+<span id="cb5-77"><a href="#cb5-77" tabindex="-1"></a><span class="do">## [zen4R][INFO] File '2008_Mossong_POLYMOD_participant_extra.csv': integrity verified (md5sum: 4e2dd8d6ba2d23bb5b1f236be215b936)</span></span>
+<span id="cb5-78"><a href="#cb5-78" tabindex="-1"></a></span>
+<span id="cb5-79"><a href="#cb5-79" tabindex="-1"></a><span class="do">## ℹ File '2008_Mossong_POLYMOD_sday.csv': integrity verified (md5sum: 148c5fc86ca10d385e3d047014e14a09)</span></span>
+<span id="cb5-80"><a href="#cb5-80" tabindex="-1"></a></span>
+<span id="cb5-81"><a href="#cb5-81" tabindex="-1"></a><span class="do">## [zen4R][INFO] File '2008_Mossong_POLYMOD_sday.csv': integrity verified (md5sum: 148c5fc86ca10d385e3d047014e14a09)</span></span>
+<span id="cb5-82"><a href="#cb5-82" tabindex="-1"></a></span>
+<span id="cb5-83"><a href="#cb5-83" tabindex="-1"></a><span class="do">## ✔ End of download</span></span>
+<span id="cb5-84"><a href="#cb5-84" tabindex="-1"></a></span>
+<span id="cb5-85"><a href="#cb5-85" tabindex="-1"></a><span class="do">## [zen4R][INFO] ZenodoRecord - End of download</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">polymod_survey_files</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="do">## [1] "/Users/runner/Library/Application Support/org.R-project.R/R/contactsurveys/2008_Mossong_POLYMOD_hh_common.csv"         </span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="do">## [2] "/Users/runner/Library/Application Support/org.R-project.R/R/contactsurveys/2008_Mossong_POLYMOD_contact_common.csv"    </span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="do">## [3] "/Users/runner/Library/Application Support/org.R-project.R/R/contactsurveys/2008_Mossong_POLYMOD_dictionary.xls"        </span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="do">## [4] "/Users/runner/Library/Application Support/org.R-project.R/R/contactsurveys/2008_Mossong_POLYMOD_hh_extra.csv"          </span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="do">## [5] "/Users/runner/Library/Application Support/org.R-project.R/R/contactsurveys/2008_Mossong_POLYMOD_participant_common.csv"</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="do">## [6] "/Users/runner/Library/Application Support/org.R-project.R/R/contactsurveys/2008_Mossong_POLYMOD_participant_extra.csv" </span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="do">## [7] "/Users/runner/Library/Application Support/org.R-project.R/R/contactsurveys/2008_Mossong_POLYMOD_sday.csv"</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="getting-citations">Getting citations<a class="anchor" aria-label="anchor" href="#getting-citations"></a>
+</h2>
+<p>A reference for any given survey can be obtained by passing a DOI to <code><a href="reference/get_citation.html">get_citation()</a></code>:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/get_citation.html">get_citation</a></span><span class="op">(</span><span class="va">polymod_doi</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="do">## ℹ Fetching citation</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="do">## ✔ Citation fetched! [965ms]</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a><span class="do">## @dataset{joel_mossong_2020_3874557,</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="do">##   author       = {Joël Mossong and</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a><span class="do">##                   Niel Hens and</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="do">##                   Mark Jit and</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="do">##                   Philippe Beutels and</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="do">##                   Kari Auranen and</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="do">##                   Rafael Mikolajczyk and</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="do">##                   Marco Massari and</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="do">##                   Stefania Salmaso and</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="do">##                   Gianpaolo Scalia Tomba and</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="do">##                   Jacco Wallinga and</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="do">##                   Janneke Heijne and</span></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a><span class="do">##                   Malgorzata Sadkowska-Todys and</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="do">##                   Magdalena Rosinska and</span></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="do">##                   W. John Edmunds},</span></span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a><span class="do">##   title        = {POLYMOD social contact data},</span></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a><span class="do">##   month        = jun,</span></span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a><span class="do">##   year         = 2020,</span></span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a><span class="do">##   publisher    = {Zenodo},</span></span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a><span class="do">##   version      = 2,</span></span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a><span class="do">##   doi          = {10.5281/zenodo.3874557},</span></span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a><span class="do">##   url          = {https://doi.org/10.5281/zenodo.3874557},</span></span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a><span class="do">## }</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="using-contact-matrices-with-socialmixr">Using contact matrices with socialmixr<a class="anchor" aria-label="anchor" href="#using-contact-matrices-with-socialmixr"></a>
+</h2>
+<p>You can then use the survey files downloaded with functions from <a href="https://github.com/epiforecasts/socialmixr" class="external-link">socialmixr</a>, <code><a href="https://epiforecasts.io/socialmixr/reference/load_survey.html" class="external-link">load_survey()</a></code> and <code><a href="https://epiforecasts.io/socialmixr/reference/contact_matrix.html" class="external-link">contact_matrix()</a></code>.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiforecasts/socialmixr" class="external-link">socialmixr</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="do">## Attaching package: 'socialmixr'</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="do">## The following objects are masked from 'package:contactsurveys':</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="do">##     download_survey, get_citation, list_surveys</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">polymod_loaded</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiforecasts.io/socialmixr/reference/load_survey.html" class="external-link">load_survey</a></span><span class="op">(</span><span class="va">polymod_survey_files</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="do">## Warning: No reference provided.</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">uk_contact_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiforecasts.io/socialmixr/reference/contact_matrix.html" class="external-link">contact_matrix</a></span><span class="op">(</span></span>
+<span>      <span class="va">polymod_loaded</span>,</span>
+<span>      countries <span class="op">=</span> <span class="st">"United Kingdom"</span>,</span>
+<span>      age.limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">18</span>, <span class="fl">65</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="do">## Removing participants that have contacts without age information.</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="do">## ℹ To change this behaviour, set the 'missing.contact.age' option.</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">uk_contact_matrix</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="do">## $matrix</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="do">##          contact.age.group</span></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="do">## age.group   [0,18)  [18,65)       65+</span></span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a><span class="do">##   [0,18)  7.813187 5.505495 0.2664835</span></span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a><span class="do">##   [18,65) 2.103215 8.174281 0.6463621</span></span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="do">##   65+     1.160714 5.464286 1.7142857</span></span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="do">## $participants</span></span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="do">##    age.group participants proportion</span></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a><span class="do">##       &lt;char&gt;        &lt;int&gt;      &lt;num&gt;</span></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="do">## 1:    [0,18)          364  0.3600396</span></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a><span class="do">## 2:   [18,65)          591  0.5845697</span></span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a><span class="do">## 3:       65+           56  0.0553907</span></span></code></pre></div>
+</div>
 <div class="section level2">
 <h2 id="contributors">Contributors<a class="anchor" aria-label="anchor" href="#contributors"></a>
 </h2>
