@@ -66,10 +66,11 @@
 <p><a href="https://github.com/epiforecasts/contactsurveys" class="external-link">contactsurveys</a>
 is an <code>R</code> package to download contact surveys for use in
 age-structured <a href="https://en.wikipedia.org/wiki/Mathematical_modelling_of_infectious_disease" class="external-link">infectious
-disease models</a>. This code was initially in the <a href="https://github.com/epiforecasts/socialmixr" class="external-link">socialmixr</a>, but
-the specific code for downloading surveys has been placed into this
-package. For background on age-specific mixing matrices and what data
-inform them, see, for example, the paper on POLYMOD by <span class="citation">(<a href="#ref-mossong_social_2008">Mossong et al.
+disease models</a>. This code was initially in the <a href="https://github.com/epiforecasts/socialmixr" class="external-link">socialmixr</a>
+package, but the code for downloading surveys has been moved into this
+package.</p>
+<p>For background on age-specific mixing matrices and what data inform
+them, see, for example, the paper on POLYMOD by <span class="citation">(<a href="#ref-mossong_social_2008">Mossong et al.
 2008</a>)</span>.</p>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -80,36 +81,43 @@ available surveys can be listed (if an internet connection is available)
 with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/list_surveys.html">list_surveys</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>A survey can be downloaded using the <code>get_survey()</code>
-command. This will get the relevant data of a survey given its Zenodo
-DOI (as returned by <code><a href="../reference/list_surveys.html">list_surveys()</a></code>). All other relevant
-commands in the <code>contactsurveys</code> package accept a DOI, but if
-a survey is to be used repeatedly it is worth downloading it and storing
-it locally to avoid the need for a network connection and speed up
-processing.</p>
+<p>By default, the survey data from <code><a href="../reference/list_surveys.html">list_surveys()</a></code> is
+effectively cached, so it will run very quickly the next time you run
+it. This data will also persist across R sessions.</p>
+<p>To expand on this, the downloads in this package are downloaded to a
+default location specified by <code><a href="../reference/contactsurveys_dir.html">contactsurveys_dir()</a></code>, which
+uses <code><a href="https://rdrr.io/r/tools/userdir.html" class="external-link">tools::R_user_dir()</a></code> under the hood to find an
+appropriate place to write files. You can also control where files are
+saved by setting an environment variable,
+<code>CONTACTSURVEYS_HOME</code>. See <code>?Sys.setenv()</code> or
+<code><a href="https://rdrr.io/r/base/Startup.html" class="external-link">?Renviron</a></code> for more detail.</p>
+<p>Surveys can be downloaded using <code><a href="../reference/download_survey.html">download_survey()</a></code>. This
+will get the relevant data of a survey given its Zenodo DOI (as returned
+by <code><a href="../reference/list_surveys.html">list_surveys()</a></code>).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">peru_survey</span> <span class="op">&lt;-</span> <span class="fu">get_survey</span><span class="op">(</span><span class="st">"https://doi.org/10.5281/zenodo.1095664"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">saveRDS</a></span><span class="op">(</span><span class="va">peru_survey</span>, <span class="st">"peru.rds"</span><span class="op">)</span></span></code></pre></div>
-<p>This way, the <code>peru</code> data set can be loaded in the future
-without the need for an internet connection using</p>
+<code class="sourceCode R"><span><span class="va">polymod_doi</span> <span class="op">&lt;-</span> <span class="st">"https://doi.org/10.5281/zenodo.3874557"</span></span>
+<span><span class="va">polymod_survey_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_survey.html">download_survey</a></span><span class="op">(</span><span class="va">polymod_doi</span><span class="op">)</span></span>
+<span><span class="va">polymod_survey_files</span></span></code></pre></div>
+<p>A reference for any given survey can be obtained by passing a DOI to
+<code><a href="../reference/get_citation.html">get_citation()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">peru_survey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"peru.rds"</span><span class="op">)</span></span></code></pre></div>
-<p>Some surveys may contain data from multiple countries. To check this,
-use the <code>survey_countries</code> function</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_citation.html">get_citation</a></span><span class="op">(</span><span class="va">polymod_doi</span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="using-contact-matrices-with-socialmixr">Using contact matrices with socialmixr<a class="anchor" aria-label="anchor" href="#using-contact-matrices-with-socialmixr"></a>
+</h3>
+<p>You can then use the survey files downloaded with functions from <a href="https://github.com/epiforecasts/socialmixr" class="external-link">socialmixr</a>,
+<code><a href="https://epiforecasts.io/socialmixr/reference/load_survey.html" class="external-link">load_survey()</a></code> and <code><a href="https://epiforecasts.io/socialmixr/reference/contact_matrix.html" class="external-link">contact_matrix()</a></code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># TODO - update this to note use polymod</span></span>
-<span><span class="fu">survey_countries</span><span class="op">(</span><span class="va">polymod</span><span class="op">)</span></span></code></pre></div>
-<p>If one wishes to get a contact matrix for one or more specific
-countries, a <code>countries</code> argument can be passed to
-<code>contact_matrix()</code>. If this is not done, the different
-surveys contained in a dataset are combined as if they were one single
-sample (i.e., not applying any population-weighting by country or other
-correction).</p>
-<p>A reference for any given survey can be obtained using
-<code><a href="../reference/get_citation.html">get_citation()</a></code>, e.g.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># TODO - update this to note use polymod</span></span>
-<span><span class="fu"><a href="../reference/get_citation.html">get_citation</a></span><span class="op">(</span><span class="va">polymod</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiforecasts/socialmixr" class="external-link">socialmixr</a></span><span class="op">)</span> <span class="co"># nolint</span></span>
+<span><span class="va">polymod_loaded</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiforecasts.io/socialmixr/reference/load_survey.html" class="external-link">load_survey</a></span><span class="op">(</span><span class="va">polymod_survey_files</span><span class="op">)</span></span>
+<span><span class="va">uk_contact_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://epiforecasts.io/socialmixr/reference/contact_matrix.html" class="external-link">contact_matrix</a></span><span class="op">(</span></span>
+<span>  <span class="va">polymod_loaded</span>,</span>
+<span>  countries <span class="op">=</span> <span class="st">"United Kingdom"</span>,</span>
+<span>  age.limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">18</span>, <span class="fl">65</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">uk_contact_matrix</span></span></code></pre></div>
+</div>
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -130,7 +138,7 @@ Diseases.”</span> <em><span>PLOS</span> Medicine</em> 5 (3): e74. <a href="htt
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Sebastian Funk, Lander Willem, Hugo Gruson.</p>
+  <p>Developed by Sebastian Funk, Lander Willem, Hugo Gruson, Nicholas Tierney.</p>
 </div>
 
 <div class="pkgdown-footer-right">
