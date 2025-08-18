@@ -25,14 +25,15 @@ test_that("list_surveys() caches to disk and returns non-empty result", {
 test_that("list_surveys() gives warnings when non-default directory used ", {
   skip_if_offline("zenodo.org")
   skip_on_cran()
+  tmp <- withr::local_tempdir()
   expect_warning(
-    list_surveys(directory = tempdir(), verbose = TRUE),
+    list_surveys(directory = tmp, verbose = TRUE),
     "Directory",
     fixed = TRUE
   )
 })
 
-test_that("list_surveys() is verbose/silent when verbose = TRUE/FALSE", {
+test_that("list_surveys() is verbose or silent when verbose = TRUE or FALSE", {
   skip_if_offline("zenodo.org")
   skip_on_cran()
   expect_snapshot(

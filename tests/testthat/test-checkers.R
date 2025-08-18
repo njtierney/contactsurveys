@@ -3,17 +3,18 @@ test_that("check_is_url_doi() works", {
   skip_on_cran()
   expect_snapshot(
     error = TRUE,
-    check_is_url_doi(x = "a/mystery")
+    check_is_url_doi(x = "a/mystery") # nolint
   )
-  doi_peru <- "10.5281/zenodo.1095664"
+  doi_peru <- "10.5281/zenodo.1095664" # nolint
   expect_no_error(
     check_is_url_doi(x = doi_peru)
   )
 })
 
 test_that("check_directory() works", {
+  tmp <- withr::local_tempdir()
   expect_warning(
-    check_directory(directory = tempdir()),
+    check_directory(directory = tmp),
     "Directory"
   )
 })
