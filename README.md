@@ -39,7 +39,7 @@ list_surveys()
 
     ## ℹ Downloading survey list from zenodo
 
-    ## ✔ Downloading survey list from zenodo [17.8s]
+    ## ✔ Downloading survey list from zenodo [6.2s]
 
     ## 
 
@@ -313,7 +313,7 @@ get_citation(polymod_doi)
 
     ## ℹ Fetching citation
 
-    ## ✔ Citation fetched! [965ms]
+    ## ✔ Citation fetched! [920ms]
 
     ## 
 
