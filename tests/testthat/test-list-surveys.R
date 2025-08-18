@@ -1,7 +1,6 @@
 test_that("list_surveys() caches to disk and returns non-empty result", {
   skip_if_offline("zenodo.org")
   skip_on_cran()
-  skip_on_ci()
   dat <- list_surveys()
   expect_s3_class(dat, c("data.table", "data.frame"))
   expect_gt(nrow(dat), 0)
@@ -23,10 +22,20 @@ test_that("list_surveys() caches to disk and returns non-empty result", {
   )
 })
 
-test_that("list_surveys() is silent when verbose = FALSE", {
+test_that("list_surveys() gives warnings when non-default directory used ", {
   skip_if_offline("zenodo.org")
   skip_on_cran()
-  skip_on_ci()
+  tmp <- withr::local_tempdir()
+  expect_warning(
+    list_surveys(directory = tmp, verbose = TRUE),
+    "Directory",
+    fixed = TRUE
+  )
+})
+
+test_that("list_surveys() is verbose or silent when verbose = TRUE or FALSE", {
+  skip_if_offline("zenodo.org")
+  skip_on_cran()
   expect_snapshot(
     . <- list_surveys(verbose = FALSE) # nolint
   )
