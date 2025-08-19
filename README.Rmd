@@ -22,7 +22,7 @@ remotes::install_github("epiforecasts/contactsurveys")
 
 # Example usage
 
-```{r setup, include = FALSE}
+```{r setup}
 library(contactsurveys)
 ```
 
@@ -33,7 +33,7 @@ library(contactsurveys)
 The available surveys can be listed (if an internet connection is available) with `list_surveys()`
 
 ```{r}
-social_contact_surveys <- list_surveys()
+social_contact_surveys <- list_surveys(verbose = FALSE)
 dim(social_contact_surveys)
 head(social_contact_surveys)
 ```
@@ -46,7 +46,7 @@ Surveys can be downloaded using `download_survey()`. This will get the relevant 
 
 ```{r}
 polymod_doi <- "https://doi.org/10.5281/zenodo.3874557"
-polymod_survey_files <- download_survey(polymod_doi)
+polymod_survey_files <- download_survey(polymod_doi, verbose = FALSE)
 polymod_survey_files
 ```
 
@@ -55,7 +55,7 @@ polymod_survey_files
 A reference for any given survey can be obtained by passing a DOI to `get_citation()`:
 
 ```{r}
-get_citation(polymod_doi)
+get_citation(polymod_doi, verbose = FALSE)
 ```
 
 ## Using contact matrices with socialmixr
