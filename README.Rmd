@@ -33,7 +33,9 @@ library(contactsurveys)
 The available surveys can be listed (if an internet connection is available) with `list_surveys()`
 
 ```{r}
-list_surveys()
+social_contact_surveys <- list_surveys()
+dim(social_contact_surveys)
+head(social_contact_surveys)
 ```
 
 By default, the survey data from `list_surveys()` is effectively cached, so it will run very quickly the next time you run it. See `?list_surveys()` for more detail.
